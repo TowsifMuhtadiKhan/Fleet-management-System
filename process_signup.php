@@ -1,9 +1,16 @@
 <?php
 // Establish a MySQL database connection
+<<<<<<< HEAD
 $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "fms_db";
+=======
+$servername = "your_mysql_server";
+$username = "your_mysql_username";
+$password = "your_mysql_password";
+$database = "your_database_name";
+>>>>>>> bffab85a2da2befa23bec052c9c440146454dde2
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -23,7 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // You should perform data validation and sanitization here.
 
     // Insert data into the database
+<<<<<<< HEAD
     $sql = "INSERT INTO users (`Name`, `Phone`, `Email`, `Username`, `Password`) VALUES ('$name', '$phone', '$email', '$username', '$password')";
+=======
+    $sql = "INSERT INTO users (name, phone, email, username, password) VALUES ('$name', '$phone', '$email', '$username', '$password')";
+>>>>>>> bffab85a2da2befa23bec052c9c440146454dde2
 
     if ($conn->query($sql) === TRUE) {
         // Successfully registered
