@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="userprofile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
+<?php
+session_start();
+?>
 <body>
 <!-- Home Page Starts Here -->
 
@@ -42,7 +45,7 @@
             <h2 id="user-name">User Name</h2>
             <p id="phone">Phone Number</p>
             <p id="email">Email Address</p>
-            <p id="num-of-cars">Number of Cars/p>
+            <p id="num-of-cars">Number of Cars</p>
             
         </div>
         <div class="content">
@@ -111,10 +114,27 @@ imageUpload.addEventListener('change', function(event) {
     reader.readAsDataURL(file);
 });
 
-// Example data (replace this with your actual user data)
-userName.textContent = 'John Doe';
-phone.textContent = '123-456-7890';
-email.textContent = 'johndoe@example.com';
+const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSION['user_name']) : 'null'; ?>;
+    const userPhone = <?php echo isset($_SESSION['user_phone']) ? json_encode($_SESSION['user_phone']) : 'null'; ?>;
+    const userEmail = <?php echo isset($_SESSION['user_email']) ? json_encode($_SESSION['user_email']) : 'null'; ?>;
+
+    // Display user details
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user details are not null before displaying
+        if (username !== null) {
+            userName.textContent = username;
+        }
+        if (userPhone !== null) {
+            phone.textContent = userPhone;
+        }
+        if (userEmail !== null) {
+            email.textContent = userEmail;
+        }
+    });
+
+   
+
+
 numOfCars.textContent = 'Number of Cars: 3';
 
 

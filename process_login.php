@@ -1,7 +1,6 @@
 <?php
 // Establish a MySQL database connection
 
-session_start();
 
 $servername = "localhost";
 $username = "root";
@@ -25,20 +24,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // You should perform data validation and sanitization here.
-
     // Query the database to check if the username and password match
 
     $sql = "SELECT * FROM users WHERE `Username`='$username' AND `Password`='$password'";
 
-    
-
     $result = $conn->query($sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
     if ($result->num_rows > 0) {
         // Successful login
+        $_SESSION['user_name'] = $row['Name'];
+        $_SESSION['user_phone'] = $row['Phone'];
+        $_SESSION['user_email'] = $row['Email'];
+        header("Location: userprofile.php");
 
-        header("Location: userprofile.html");
+        if (isset($_FILES['image-upload'])) {
+            $targetDirectory = "uploads/"; // Create a directory for uploaded images
+            $targetFile = $targetDirectory . basename($_FILES['image-upload']['name']);
 
+            if (move_uploaded_file($_FILES['image-upload']['tmp_name'], $targetFile)) {
+                // File was successfully uploaded, you can store $targetFile in the database
+            } else {
+                echo "Image upload failed.";
+            }
+        }
+        
         exit();
     } else {
         // Login failed
