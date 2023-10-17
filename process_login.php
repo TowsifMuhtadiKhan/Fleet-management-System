@@ -38,16 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_email'] = $row['Email'];
         header("Location: userprofile.php");
 
-        if (isset($_FILES['image-upload'])) {
-            $targetDirectory = "uploads/"; // Create a directory for uploaded images
-            $targetFile = $targetDirectory . basename($_FILES['image-upload']['name']);
-
-            if (move_uploaded_file($_FILES['image-upload']['tmp_name'], $targetFile)) {
-                // File was successfully uploaded, you can store $targetFile in the database
-            } else {
-                echo "Image upload failed.";
-            }
-        }
+        
         
         exit();
     } else {

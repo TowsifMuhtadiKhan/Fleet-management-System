@@ -9,6 +9,11 @@
 </head>
 <?php
 session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "fms_db";
+$conn = new mysqli($servername, $username, $password, $database);
 ?>
 <body>
 <!-- Home Page Starts Here -->
@@ -38,7 +43,10 @@ session_start();
       <div class="dashboard-container">
         <div class="profile-card">
             <label for="image-upload" class="image-upload-label">
+                
                 <input type="file" id="image-upload" accept="image/*">
+                
+                
                 <span>Upload Image</span>
             </label>
             <div class="profile-picture" id="profile-picture"></div>
@@ -69,10 +77,13 @@ session_start();
             <button id="add-car-button">Add Car</button>
         </div>
     </div>
+
+    
+
     <div id="add-car-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="close-modal-button">&times;</span>
-            <form id="add-car-form">
+            <form id="add-car-form" action="process_addcar.php" method="post">
                 <label for="car-type">Car Type:</label>
                 <input type="text" id="car-type" name="carType" required><br>
 
@@ -131,8 +142,6 @@ const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSIO
             email.textContent = userEmail;
         }
     });
-
-   
 
 
 numOfCars.textContent = 'Number of Cars: 3';
