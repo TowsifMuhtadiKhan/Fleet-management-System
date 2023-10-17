@@ -1,0 +1,196 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+  } 
+  nav{
+    display: flex;
+    height: 150px;
+    width: 100%;
+    background: #ffffff;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px 0 100px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    
+  }
+  nav .logo{
+    color: rgb(4, 182, 84);
+    font-size: 35px;
+    font-weight: 600;
+  }
+  nav ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  nav ul li{
+    margin: 0 5px;
+  }
+  nav ul li a{
+    color:rgb(106, 106, 106);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  nav ul li a.active,
+  nav ul li a:hover{
+    color: rgb(255, 255, 255);
+    background: rgb(4, 182, 84);
+  }
+  nav .menu-btn i{
+    color: rgb(4, 182, 84);;
+    font-size: 22px;
+    cursor: pointer;
+    display: none;
+  }
+  input[type="checkbox"]{
+    display: none;
+  }
+  @media (max-width: 1000px){
+    nav{
+      padding: 0 40px 0 50px;
+    }
+    .contenforcover{
+      padding-top: 30%; 
+    }
+  }
+  @media (max-width: 920px) {
+    nav .menu-btn i{
+      display: block;
+    }
+    #click:checked ~ .menu-btn i:before{
+      content: "\f00d";
+    }
+    nav ul{
+      position: fixed;
+      top: 150px;
+      left: -100%;
+      background: whitesmoke;
+      height: 100vh;
+      width: 100%;
+      text-align: center;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    #click:checked ~ ul{
+      left: 0;
+    }
+    nav ul li{
+      width: 100%;
+      margin: 40px 0;
+    }
+    nav ul li a{
+      width: 100%;
+      margin-left: -100%;
+      display: block;
+      font-size: 20px;
+      transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    #click:checked ~ ul li a{
+      margin-left: 0px;
+    }
+    nav ul li a.active,
+    nav ul li a:hover{
+      background: none;
+      color: rgb(28, 123, 7);
+    }
+
+  }
+  .dashboard-header {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.search-container {
+    margin: 20px;
+}
+
+#data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+#data-table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+.search-container {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+#search {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+#search::placeholder {
+    color: #95a5a6;
+}
+
+.search-icon {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+}
+
+/* Hover effect for the search icon */
+.search-icon:hover {
+    background-color: #2980b9;
+}
+/* Media query for smaller screens */
+ @media (max-width: 768px) {
+    #data-table {
+        display: block;
+        overflow-x: auto;
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    #data-table, th, td {
+        display: block;
+      
+    }
+
+    th, td {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+}
