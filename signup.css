@@ -1,0 +1,100 @@
+body {
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f9fc;
+    overflow: hidden;
+}
+.logo{
+    margin: 0 auto;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.login-container {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 30%;
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(4, 182, 84);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+.colored-text{
+    color: rgb(4, 182, 84);
+}
+.text{
+    font-size: 20;
+    color: #333;
+    text-align: Center;
+}
+img {
+    max-width: 450px; /* Ensures the image does not exceed its original size */
+    height: auto; /* Maintains the aspect ratio of the image */
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+@media (max-width: 650px) {
+    img {
+        max-width: 100%; /* Ensures the image does not exceed its original size */
+        height: auto; /* Maintains the aspect ratio of the image */
+    }
+    
+    .login-container {
+        background-color: white;
+        padding: 40px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        margin-top: 2%;
+        width: 70%;
+        border-radius: 10px;
+    }
+}

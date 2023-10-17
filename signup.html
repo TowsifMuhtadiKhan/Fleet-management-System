@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signup.css">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="image/logo.png" alt="Girl in a jacket"  >
+    </div>
+    
+    <div class="login-container">
+        
+        <h2>Signup to <span class="colored-text">Fleet</span> Management</h2>
+        <form id="signupForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="repeatPassword">Repeat Password:</label>
+                <input type="password" id="repeatPassword" name="repeatPassword" required>
+                <span id="passwordError" class="error-message"></span>
+            </div>
+
+            <button type="submit">Signup</button>
+        </form>
+        <p class="text">Alrerady have an account? <a href="login.html">Login Now</a></p>
+        </div>
+
+        <script>
+            document.getElementById('signupForm').addEventListener('submit', function(event) {
+                var password = document.getElementById('password').value;
+                var repeatPassword = document.getElementById('repeatPassword').value;
+                var passwordError = document.getElementById('passwordError');
+    
+                if (password !== repeatPassword) {
+                    passwordError.textContent = 'Passwords do not match.';
+                    event.preventDefault(); // Prevent form submission
+                } else {
+                    passwordError.textContent = ''; // Clear the error message
+                }
+            });
+        </script>
+        
+</body>
+
+</html>

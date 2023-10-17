@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="userprofile.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <div class="profile-form">
+            <h2>Personal Information</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required><br>
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required><br>
+                <h2>Vehicle Information</h2>
+                <div id="vehicles">
+                    <div class="vehicle">
+                        <label for="vehicle-type">Vehicle Type:</label>
+                        <input type="text" class="vehicle-type" name="vehicle-type[]" required>
+                        <label for="vehicle-name">Vehicle Name:</label>
+                        <input type="text" class="vehicle-name" name="vehicle-name[]" required>
+                        <label for="registration-number">Registration Number:</label>
+                        <input type="text" class="registration-number" name="registration-number[]" required>
+                        <label for="engine-number">Engine Number:</label>
+                        <input type="text" class="engine-number" name="engine-number[]" required>
+                    </div>
+                </div>
+                <button type="button" onclick="addVehicle()">Add Another Vehicle</button><br>
+                <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+
+    <script >
+        function addVehicle() {
+    var vehiclesDiv = document.getElementById("vehicles");
+    var vehicleDiv = document.createElement("div");
+    vehicleDiv.classList.add("vehicle");
+
+    var vehicleTypeInput = document.createElement("input");
+    vehicleTypeInput.type = "text";
+    vehicleTypeInput.classList.add("vehicle-type");
+    vehicleTypeInput.name = "vehicle-type[]";
+    vehicleTypeInput.required = true;
+    vehicleDiv.appendChild(vehicleTypeInput);
+
+    var vehicleNameInput = document.createElement("input");
+    vehicleNameInput.type = "text";
+    vehicleNameInput.classList.add("vehicle-name");
+    vehicleNameInput.name = "vehicle-name[]";
+    vehicleNameInput.required = true;
+    vehicleDiv.appendChild(vehicleNameInput);
+
+    var registrationNumberInput = document.createElement("input");
+    registrationNumberInput.type = "text";
+    registrationNumberInput.classList.add("registration-number");
+    registrationNumberInput.name = "registration-number[]";
+    registrationNumberInput.required = true;
+    vehicleDiv.appendChild(registrationNumberInput);
+
+    var engineNumberInput = document.createElement("input");
+    engineNumberInput.type = "text";
+    engineNumberInput.classList.add("engine-number");
+    engineNumberInput.name = "engine-number[]";
+    engineNumberInput.required = true;
+    vehicleDiv.appendChild(engineNumberInput);
+
+    vehiclesDiv.appendChild(vehicleDiv);
+}
+
+    </script>
+</body>
+</html>

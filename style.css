@@ -1,0 +1,333 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+  } 
+  nav{
+    display: flex;
+    height: 150px;
+    width: 100%;
+    background: #ffffff;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px 0 100px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: fixed;
+  }
+  nav .logo{
+    color: rgb(4, 182, 84);
+    font-size: 35px;
+    font-weight: 600;
+  }
+  nav ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  nav ul li{
+    margin: 0 5px;
+  }
+  nav ul li a{
+    color:rgb(106, 106, 106);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  nav ul li a.active,
+  nav ul li a:hover{
+    color: rgb(255, 255, 255);
+    background: rgb(4, 182, 84);
+  }
+  nav .menu-btn i{
+    color: rgb(4, 182, 84);;
+    font-size: 22px;
+    cursor: pointer;
+    display: none;
+  }
+  input[type="checkbox"]{
+    display: none;
+  }
+  @media (max-width: 1000px){
+    nav{
+      padding: 0 40px 0 50px;
+    }
+    .contenforcover{
+      padding-top: 30%; 
+    }
+  }
+  @media (max-width: 920px) {
+    nav .menu-btn i{
+      display: block;
+    }
+    #click:checked ~ .menu-btn i:before{
+      content: "\f00d";
+    }
+    nav ul{
+      position: fixed;
+      top: 150px;
+      left: -100%;
+      background: whitesmoke;
+      height: 100vh;
+      width: 100%;
+      text-align: center;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    #click:checked ~ ul{
+      left: 0;
+    }
+    nav ul li{
+      width: 100%;
+      margin: 40px 0;
+    }
+    nav ul li a{
+      width: 100%;
+      margin-left: -100%;
+      display: block;
+      font-size: 20px;
+      transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    #click:checked ~ ul li a{
+      margin-left: 0px;
+    }
+    nav ul li a.active,
+    nav ul li a:hover{
+      background: none;
+      color: rgb(28, 123, 7);
+    }
+
+  }
+  .banner{
+    margin: 0%;
+    padding: 0%;
+  }
+  .center-text {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+.center-text2 {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+.text1{
+    font-size: 35px;
+    font-weight: 300;
+    margin-top: 3%;
+    padding: 2%;
+    color: rgb(0, 0, 0);
+
+  }
+  .text2{
+    font-size: 20px;
+    color: rgb(65, 65, 65);
+
+  }
+  .prototype{
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  .ceter-card-home{
+    margin: 0;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+   
+   
+}
+.card {
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    color: #666;
+}
+.title{
+    margin-top: 5%;
+    font-size: 40px;
+    color: rgb(4, 182, 84);
+}
+.title-text{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 2%;
+    font-size: 60px;
+}
+.aboutuscontainer {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.aboutustext {
+    flex: 1;
+    text-align: left;
+    padding-left: 10%;
+    padding-top: 10%;
+    padding-right: 10%;
+  
+}
+.aboutusheader{
+    font-size: 40px;
+}
+.prototype{
+    margin: 0 auto;
+    padding-top: 2%;
+    width: 50%;
+    height: auto;
+   }
+
+.aboutusimage {
+    flex: 1;
+    text-align: center;
+    
+    margin: 0 auto;
+    padding: 5%;
+}
+
+.aboutusimage img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Set maximum height for the image */
+}
+.contact{
+    width: 70%;
+    
+    margin: 0 auto;
+}
+.contactcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+   
+    margin-top: 50px;
+}
+
+.form,
+.details {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+}
+
+.form h2,
+.details h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form label,
+.form input,
+.form textarea,
+.form button,
+.details p {
+    margin-bottom: 15px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.form input,
+.form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+    background-color: #45a049;
+}
+  @media (max-width: 920px){
+    .center-text {
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        justify-content: center;
+    }
+    .text1{
+        font-size: 24px;
+        font-weight: 300;
+        margin-top: 3%;
+        padding: 2%;
+        color: rgb(0, 0, 0);
+      }
+      .text2{
+        font-size: 15px;
+        color: #666;
+    
+      }
+      .title{
+        margin-top: 5%;
+        font-size: 25px;
+        color: rgb(4, 182, 84);
+    }
+    .title-text{
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 2%;
+        font-size: 30px;
+    }
+    .aboutuscontainer {
+        flex-direction: column;
+    }
+
+    .aboutustext,
+    .aboutusimage {
+        flex: none;
+        width: 100%;
+    }
+   .prototype{
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+   }
+   .contact{
+    width: 80%;
+    
+    margin: 0 auto;
+}
+  }
+
+  
