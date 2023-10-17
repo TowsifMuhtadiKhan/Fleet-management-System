@@ -6,7 +6,6 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f7f9fc;
-    overflow: hidden;
 }
 .logo{
     margin: 0 auto;

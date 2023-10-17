@@ -3,76 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="userprofile.css">
-    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 </head>
 <body>
-    <div class="container">
-        <h1>User Profile</h1>
-        <div class="profile-form">
-            <h2>Personal Information</h2>
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br>
-                <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required><br>
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required><br>
-                <h2>Vehicle Information</h2>
-                <div id="vehicles">
-                    <div class="vehicle">
-                        <label for="vehicle-type">Vehicle Type:</label>
-                        <input type="text" class="vehicle-type" name="vehicle-type[]" required>
-                        <label for="vehicle-name">Vehicle Name:</label>
-                        <input type="text" class="vehicle-name" name="vehicle-name[]" required>
-                        <label for="registration-number">Registration Number:</label>
-                        <input type="text" class="registration-number" name="registration-number[]" required>
-                        <label for="engine-number">Engine Number:</label>
-                        <input type="text" class="engine-number" name="engine-number[]" required>
-                    </div>
-                </div>
-                <button type="button" onclick="addVehicle()">Add Another Vehicle</button><br>
-                <input type="submit" value="Save">
+<!-- Home Page Starts Here -->
+
+    <!-- NavBAr Section Starts here -->
+    <nav>
+
+        <div class="logo">
+          <img src="image/logo.png" alt="Girl in a jacket" width="250" >
+        </div>
+
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
+
+        <ul>
+          <li><a class="active" href="#">Home</a></li>
+          <li><a href="#aboutus">About Us</a></li>
+          <li><a href="#features">Feature</a></li>
+          <li><a href="#contactus">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+
+      </nav>
+      <!-- NavBAr Section Ends here -->
+      <div class="dashboard-container">
+        <div class="profile-card">
+            <label for="image-upload" class="image-upload-label">
+                <input type="file" id="image-upload" accept="image/*">
+                <span>Upload Image</span>
+            </label>
+            <div class="profile-picture" id="profile-picture"></div>
+            <h2 id="user-name">User Name</h2>
+            <p id="phone">Phone Number</p>
+            <p id="email">Email Address</p>
+            <p id="num-of-cars">Number of Cars: 3</p>
+        </div>
+        <div class="content">
+            <h2>Car Information</h2>
+            <table id="car-table">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Car Type</th>
+                        <th>Car Name</th>
+                        <th>Car Model</th>
+                        <th>Registration Number</th>
+                        <th>Chassis Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="car-table-body">
+                    <!-- Table rows will be dynamically populated here -->
+                </tbody>
+            </table>
+            <button id="add-car-button">Add Car</button>
+        </div>
+    </div>
+    <div id="add-car-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal-button">&times;</span>
+            <form id="add-car-form">
+                <label for="car-type">Car Type:</label>
+                <input type="text" id="car-type" name="carType" required><br>
+
+                <label for="car-name">Car Name:</label>
+                <input type="text" id="car-name" name="carName" required><br>
+
+                <label for="car-model">Car Model:</label>
+                <input type="text" id="car-model" name="carModel" required><br>
+
+                <label for="registration-number">Registration Number:</label>
+                <input type="text" id="registration-number" name="registrationNumber" required><br>
+
+                <label for="chassis-number">Chassis Number:</label>
+                <input type="text" id="chassis-number" name="chassisNumber" required><br>
+
+                <button type="submit">Save</button>
             </form>
         </div>
     </div>
 
     <script >
-        function addVehicle() {
-    var vehiclesDiv = document.getElementById("vehicles");
-    var vehicleDiv = document.createElement("div");
-    vehicleDiv.classList.add("vehicle");
+        const imageUpload = document.getElementById('image-upload');
+const profilePicture = document.getElementById('profile-picture');
+const userName = document.getElementById('user-name');
+const phone = document.getElementById('phone');
+const email = document.getElementById('email');
+const numOfCars = document.getElementById('num-of-cars');
 
-    var vehicleTypeInput = document.createElement("input");
-    vehicleTypeInput.type = "text";
-    vehicleTypeInput.classList.add("vehicle-type");
-    vehicleTypeInput.name = "vehicle-type[]";
-    vehicleTypeInput.required = true;
-    vehicleDiv.appendChild(vehicleTypeInput);
+// Function to handle image upload
+imageUpload.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-    var vehicleNameInput = document.createElement("input");
-    vehicleNameInput.type = "text";
-    vehicleNameInput.classList.add("vehicle-name");
-    vehicleNameInput.name = "vehicle-name[]";
-    vehicleNameInput.required = true;
-    vehicleDiv.appendChild(vehicleNameInput);
+    reader.onload = function (e) {
+        profilePicture.style.backgroundImage = `url('${e.target.result}')`;
+    };
 
-    var registrationNumberInput = document.createElement("input");
-    registrationNumberInput.type = "text";
-    registrationNumberInput.classList.add("registration-number");
-    registrationNumberInput.name = "registration-number[]";
-    registrationNumberInput.required = true;
-    vehicleDiv.appendChild(registrationNumberInput);
+    reader.readAsDataURL(file);
+});
 
-    var engineNumberInput = document.createElement("input");
-    engineNumberInput.type = "text";
-    engineNumberInput.classList.add("engine-number");
-    engineNumberInput.name = "engine-number[]";
-    engineNumberInput.required = true;
-    vehicleDiv.appendChild(engineNumberInput);
+// Example data (replace this with your actual user data)
+userName.textContent = 'John Doe';
+phone.textContent = '123-456-7890';
+email.textContent = 'johndoe@example.com';
+numOfCars.textContent = 'Number of Cars: 3';
 
-    vehiclesDiv.appendChild(vehicleDiv);
+
+const carTableBody = document.getElementById('car-table-body');
+const addCarButton = document.getElementById('add-car-button');
+const addCarModal = document.getElementById('add-car-modal');
+const addCarForm = document.getElementById('add-car-form');
+
+let carData = [];
+
+// Function to render car table
+function renderCarTable() {
+    carTableBody.innerHTML = '';
+    carData.forEach((car, index) => {
+        const row = `<tr>
+                        <td>${index + 1}</td>
+                        <td>${car.carType}</td>
+                        <td>${car.carName}</td>
+                        <td>${car.carModel}</td>
+                        <td>${car.registrationNumber}</td>
+                        <td>${car.chassisNumber}</td>
+                        <td class="action-buttons">
+                            <button class="sensor-button">Sensor</button>
+                            <button class="gps-button">GPS</button>
+                            <button class="scanner-button">Scanner</button>
+                        </td>
+                    </tr>`;
+        carTableBody.innerHTML += row;
+    });
+
+    // Show action buttons if there is data in the table
+    const actionButtons = document.querySelectorAll('.action-buttons');
+    actionButtons.forEach(buttonGroup => {
+        buttonGroup.style.display = 'flex';
+    });
 }
+
+// Function to show add car modal
+function showAddCarModal() {
+    addCarModal.style.display = 'flex';
+}
+
+// Function to hide add car modal
+function hideAddCarModal() {
+    addCarModal.style.display = 'none';
+    addCarForm.reset();
+}
+
+// Event listener for Add Car button
+addCarButton.addEventListener('click', showAddCarModal);
+
+// Event listener for Close button in the Add Car modal
+document.getElementById('close-modal-button').addEventListener('click', hideAddCarModal);
+
+// Event listener for Save button in the Add Car modal
+addCarForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(addCarForm);
+    const carObject = {};
+    formData.forEach((value, key) => {
+        carObject[key] = value;
+    });
+    carData.push(carObject);
+    hideAddCarModal();
+    renderCarTable();
+});
+
+
 
     </script>
 </body>
