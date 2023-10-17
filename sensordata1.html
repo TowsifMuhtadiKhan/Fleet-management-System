@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sensordata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+</head>
+<body>
+<!-- Home Page Starts Here -->
+
+    <!-- NavBAr Section Starts here -->
+    <nav>
+
+        <div class="logo">
+          <img src="image/logo.png" alt="Girl in a jacket" width="250" >
+        </div>
+
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
+
+        <ul>
+          <li><a class="active" href="#">Home</a></li>
+          <li><a href="#aboutus">About Us</a></li>
+          <li><a href="#features">Feature</a></li>
+          <li><a href="#contactus">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+
+      </nav>
+      <!-- NavBAr Section Ends here -->
+      <div class="container">
+        <div class="search-container">
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="Search...">
+        </div>
+        <div class="table-container">
+            <table id="sensor-table">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Car Model</th>
+                        <th>Car Name</th>
+                        <th>Car Type</th>
+                        <th>Registration Number</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                        <th>Air Pressure</th>
+                    </tr>
+                </thead>
+                <tbody id="sensor-table-body">
+                    <!-- Table rows will be dynamically populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const sensorData = [
+    // Your sensor data objects go here
+    // Example: { sl: 1, carModel: "Model A", carName: "Car 1", carType: "SUV", registrationNumber: "ABC123", time: "12:30 PM", date: "2023-10-21", temperature: "25°C", humidity: "50%", airPressure: "1013 hPa" }
+];
+
+const searchInput = document.getElementById('search');
+const sensorTableBody = document.getElementById('sensor-table-body');
+
+// Function to render sensor data table
+function renderSensorTable(data) {
+    sensorTableBody.innerHTML = '';
+    data.forEach((entry, index) => {
+        const row = `<tr>
+                        <td>${entry.sl}</td>
+                        <td>${entry.carModel}</td>
+                        <td>${entry.carName}</td>
+                        <td>${entry.carType}</td>
+                        <td>${entry.registrationNumber}</td>
+                        <td>${entry.time}</td>
+                        <td>${entry.date}</td>
+                        <td>${entry.temperature}</td>
+                        <td>${entry.humidity}</td>
+                        <td>${entry.airPressure}</td>
+                    </tr>`;
+        sensorTableBody.innerHTML += row;
+    });
+}
+
+// Initial rendering of the sensor table
+renderSensorTable(sensorData);
+
+// Event listener for search input
+searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredData = sensorData.filter(entry => {
+        return Object.values(entry).some(value =>
+            value.toString().toLowerCase().includes(searchTerm)
+        );
+    });
+    renderSensorTable(filteredData);
+});
+    </script>
+</body>
+</html>
