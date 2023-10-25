@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="userprofile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <?php
 session_start();
@@ -13,7 +15,41 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "fms_db";
-$conn = new mysqli($servername, $username, $password, $database);
+
+
+$mysqli = new mysqli($servername, $username, $password, $database);
+
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+// Fetch data from the 'addcar' table
+$sql = "SELECT * FROM addcar";
+$result = $mysqli->query($sql);
+$index = 0;
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    
+    // Populate the form fields with the retrieved data
+    $carType = $row['Car_Type'];
+    $carName = $row['Car_Name'];
+    $carModel = $row['Car_Model'];
+    $registrationNumber = $row['Registration_Number'];
+    $chassisNumber = $row['Chassis_Number'];
+}
+
+$sql2 = "SELECT * FROM sensor_data";
+$result2 = $mysqli->query($sql2);
+$index2 = 0;
+
+$sql3 = "SELECT * FROM gps_data";
+$result3 = $mysqli->query($sql3);
+$index3 = 0;
+// if($result2->num_rows > 0){
+//     $row2 = $result2->fetch_assoc();
+// }
+
+$mysqli->close();
 ?>
 <body>
 <!-- Home Page Starts Here -->
@@ -70,40 +106,115 @@ $conn = new mysqli($servername, $username, $password, $database);
                         <th>Action</th>
                     </tr>
                 </thead>
+                <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){  
+                    $index++;
+                    ?>
                 <tbody id="car-table-body">
-                    <!-- Table rows will be dynamically populated here -->
+                    <tr>
+                        <td><?php echo $index; ?></td>
+                        <td><?php echo $row['Car_Type']; ?></td>
+                        <td><?php echo $row['Car_Name']; ?></td>
+                        <td><?php echo $row['Car_Name']; ?></td>
+                        <td><?php echo $row['Registration_Number']; ?></td>
+                        <td><?php echo $row['Chassis_Number']; ?></td>
+                        <td class="action-buttons flex">
+                            <button class="sensor-button" onclick="my_modal_1.showModal()">Sensor</button>
+                            <button class="gps-button" onclick="my_modal_2.showModal()">GPS</button>
+                            <button class="scanner-button">Scanner</button>
+                            <button class="scanner-button">Drowsiness</button>
+                        </td>
+                    </tr>
                 </tbody>
+                <?php } ?>
             </table>
-            <button id="add-car-button">Add Car</button>
+            <a href="add_car.html"><button class="btn btn-primary">Add Car</button></a>
         </div>
     </div>
-
     
-
-    <div id="add-car-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-modal-button">&times;</span>
-            <form id="add-car-form" action="process_addcar.php" method="post">
-                <label for="car-type">Car Type:</label>
-                <input type="text" id="car-type" name="carType" required><br>
-
-                <label for="car-name">Car Name:</label>
-                <input type="text" id="car-name" name="carName" required><br>
-
-                <label for="car-model">Car Model:</label>
-                <input type="text" id="car-model" name="carModel" required><br>
-
-                <label for="registration-number">Registration Number:</label>
-                <input type="text" id="registration-number" name="registrationNumber" required><br>
-
-                <label for="chassis-number">Chassis Number:</label>
-                <input type="text" id="chassis-number" name="chassisNumber" required><br>
-
-                <button type="submit">Save</button>
-            </form>
-        </div>
+    <dialog id="my_modal_1" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box w-full">
+    <h3 class="font-bold text-lg">Sensor Data</h3>
+    
+    <div class="modal-action">
+      <form method="dialog">
+      <div class="">
+  <table>
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Sl no</th>
+        <th>Time & Date</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Air_Pressure</th>
+      </tr>
+    </thead>
+    <?php while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)){ 
+        $index2++;
+        ?>
+    <tbody>
+      <!-- row 1 -->
+      <tr class="bg-base-200">
+        <td><?php echo $index2?></td>
+        <td><?php echo $row2['Time_Date']; ?></td>
+        <td><?php echo $row2['Temperature']; ?></td>
+        <td><?php echo $row2['Humidity']; ?></td>
+        <td><?php echo $row2['Air_Pressure']; ?></td>
+      </tr>
+      <!-- row 2 -->
+      
+    </tbody>
+    <?php } ?>
+  </table>
+</div>
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
     </div>
-
+  </div>
+</dialog>
+    
+<dialog id="my_modal_2" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box w-full">
+    <h3 class="font-bold text-lg">GPS Data</h3>
+    
+    <div class="modal-action">
+      <form method="dialog">
+      <div class="">
+  <table>
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Sl no</th>
+        <th>Time & Date</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        
+      </tr>
+    </thead>
+    <?php while($row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC)){ 
+        $index3++;
+        ?>
+    <tbody>
+      <!-- row 1 -->
+      <tr class="bg-base-200">
+        <td><?php echo $index3?></td>
+        <td><?php echo $row3['Time_Data']; ?></td>
+        <td><?php echo $row3['Longitude']; ?></td>
+        <td><?php echo $row3['Latitude']; ?></td>
+      </tr>
+      <!-- row 2 -->
+      
+    </tbody>
+    <?php } ?>
+  </table>
+</div>
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
     <script >
         const imageUpload = document.getElementById('image-upload');
 const profilePicture = document.getElementById('profile-picture');
@@ -147,69 +258,9 @@ const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSIO
 numOfCars.textContent = 'Number of Cars: 3';
 
 
-const carTableBody = document.getElementById('car-table-body');
-const addCarButton = document.getElementById('add-car-button');
-const addCarModal = document.getElementById('add-car-modal');
-const addCarForm = document.getElementById('add-car-form');
 
-let carData = [];
 
-// Function to render car table
-function renderCarTable() {
-    carTableBody.innerHTML = '';
-    carData.forEach((car, index) => {
-        const row = `<tr>
-                        <td>${index + 1}</td>
-                        <td>${car.carType}</td>
-                        <td>${car.carName}</td>
-                        <td>${car.carModel}</td>
-                        <td>${car.registrationNumber}</td>
-                        <td>${car.chassisNumber}</td>
-                        <td class="action-buttons">
-                            <button class="sensor-button">Sensor</button>
-                            <button class="gps-button">GPS</button>
-                            <button class="scanner-button">Scanner</button>
-                        </td>
-                    </tr>`;
-        carTableBody.innerHTML += row;
-    });
 
-    // Show action buttons if there is data in the table
-    const actionButtons = document.querySelectorAll('.action-buttons');
-    actionButtons.forEach(buttonGroup => {
-        buttonGroup.style.display = 'flex';
-    });
-}
-
-// Function to show add car modal
-function showAddCarModal() {
-    addCarModal.style.display = 'flex';
-}
-
-// Function to hide add car modal
-function hideAddCarModal() {
-    addCarModal.style.display = 'none';
-    addCarForm.reset();
-}
-
-// Event listener for Add Car button
-addCarButton.addEventListener('click', showAddCarModal);
-
-// Event listener for Close button in the Add Car modal
-document.getElementById('close-modal-button').addEventListener('click', hideAddCarModal);
-
-// Event listener for Save button in the Add Car modal
-addCarForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(addCarForm);
-    const carObject = {};
-    formData.forEach((value, key) => {
-        carObject[key] = value;
-    });
-    carData.push(carObject);
-    hideAddCarModal();
-    renderCarTable();
-});
 
 
     </script>

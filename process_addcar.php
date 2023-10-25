@@ -25,17 +25,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Construct the SQL INSERT query
     $sql = "INSERT INTO addcar (`Car_Type`, `Car_Name`, `Car_Model`, `Registration_Number`, `Chassis_Number`) VALUES ('$carType', '$carName', '$carModel', '$registrationNumber', '$chassisNumber')";
     
-    // Prepare the SQL statement
-    
-    // Bind parameters
-    //$stmt->bind_param("sssss", $carType, $carName, $carModel, $registrationNumber, $chassisNumber);
-
-    // Execute the statement
     if ($conn->query($sql) === TRUE) {
         echo "Record inserted successfully!";
     } else {
         echo "Error inserting record: " . $conn->error;
     }
+
+    $sql2 = "SELECT `Car_Type`, `Car_Name`, `Car_Model`, `Registration_Number`, `Chassis_Number` FROM `addcar`";
+
+    // $sql2 = "SELECT `Car_Type`, `Car_Name`, `Car_Model`, `Registration_Number`, `Chassis_Number` FROM `addcar` WHERE `Registration_Number` = '$registrationNumber'";
+
+    $result = $conn->query($sql2);
+
+    if ($result->num_rows > 0) {
+        $carData = array();
+        while ($row = $result->fetch_assoc()) {
+            $carData[] = $row;
+        }
+        echo json_encode($carData);
+    } else {
+        echo 'error'; // No data found
+    }
+
+    // Prepare the SQL statement
+    
+    // Bind parameters
+    //$stmt->bind_param("sssss", $carType, $carName, $carModel, $registrationNumber, $chassisNumber);
+    // $sql2 = "SELECT carType, carName, carModel, registrationNumber, chassisNumber FROM cars WHERE registrationNumber = '$registrationNumber'";
+
+    // $result = $conn->query($sql2);
+
+    // if ($result->num_rows > 0) {
+    //     $carData = array();
+    //     while ($row = $result->fetch_assoc()) {
+    //         $carData[] = $row;
+    //     }
+    //     echo json_encode($carData);
+    // } else {
+    //     echo 'error'; // No data found
+    // }
+
+    // Execute the statement
+    
 
     // Close the statement and the database connection
   
