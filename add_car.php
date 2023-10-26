@@ -1,3 +1,10 @@
+<?php
+
+if (isset($_POST['uemail'])) {
+    $uemail = $_POST['uemail'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +46,10 @@
                 <input type="text" id="password" name="chassisNumber" required>
             </div>
 
-           
+            <div class="input-group">
+                <label for="password">Email</label>
+                <input type="text" id="email" name="email" value="<?php echo $uemail; ?>" readonly>
+            </div>
 
             <button type="submit">Add Car</button>
         </form>

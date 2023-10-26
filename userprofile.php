@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .circular-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Create a circular frame */
+            overflow: hidden; /* Hide image overflow outside the circular frame */
+        }
+        
+    </style>
 </head>
 <?php
 session_start();
@@ -16,27 +25,16 @@ $username = "root";
 $password = "";
 $database = "fms_db";
 
-
 $mysqli = new mysqli($servername, $username, $password, $database);
 
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
-
+$userEmail = $_SESSION['user_email'];
 // Fetch data from the 'addcar' table
-$sql = "SELECT * FROM addcar";
+$sql = "SELECT * FROM addcar WHERE `Email` = '$userEmail'";
 $result = $mysqli->query($sql);
 $index = 0;
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    
-    // Populate the form fields with the retrieved data
-    $carType = $row['Car_Type'];
-    $carName = $row['Car_Name'];
-    $carModel = $row['Car_Model'];
-    $registrationNumber = $row['Registration_Number'];
-    $chassisNumber = $row['Chassis_Number'];
-}
 
 $sql2 = "SELECT * FROM sensor_data";
 $result2 = $mysqli->query($sql2);
@@ -48,6 +46,29 @@ $index3 = 0;
 // if($result2->num_rows > 0){
 //     $row2 = $result2->fetch_assoc();
 // }
+
+$sql4 = "SELECT `Image` FROM users WHERE `email` = '$userEmail'";
+$result4 = $mysqli->query($sql4);
+
+if ($result4->num_rows > 0) {
+    $row4 = $result4->fetch_assoc();
+    $image_path = $row4['Image']; 
+    
+} else {
+    echo "User not found or image not available.";
+}
+
+$reg_num = "";
+if (isset($_POST['reg_num'])) {
+  $reg_num = $_POST['reg_num'];
+  
+  // You can use $reg_num as needed here
+  echo $reg_num;
+} else {
+  echo "Registration Number not received.";
+}
+$sql5 = "SELECT * FROM sensor_data WHERE `Registration_Number` = '$reg_num'";
+$result5 = $mysqli->query($sql5);
 
 $mysqli->close();
 ?>
@@ -78,14 +99,15 @@ $mysqli->close();
       <!-- NavBAr Section Ends here -->
       <div class="dashboard-container">
         <div class="profile-card">
-            <label for="image-upload" class="image-upload-label">
+            
                 
-                <input type="file" id="image-upload" accept="image/*">
-                
-                
-                <span>Upload Image</span>
-            </label>
-            <div class="profile-picture" id="profile-picture"></div>
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <input type="file" id="image-upload" name="image" accept="image/*" required>
+        <input type="hidden" name="uemail" value=<?php echo $userEmail; ?> >
+        <button type="submit" name="upload">Upload</button>
+    </form>
+    <div class="profile-picture" id="profile-picture" style="background-image: url('<?php echo $image_path; ?>')"></div>   
+    
             <h2 id="user-name">User Name</h2>
             <p id="phone">Phone Number</p>
             <p id="email">Email Address</p>
@@ -114,20 +136,31 @@ $mysqli->close();
                         <td><?php echo $index; ?></td>
                         <td><?php echo $row['Car_Type']; ?></td>
                         <td><?php echo $row['Car_Name']; ?></td>
-                        <td><?php echo $row['Car_Name']; ?></td>
-                        <td><?php echo $row['Registration_Number']; ?></td>
+                        <td><?php echo $row['Car_Model']; ?></td>
+                        <td><?php echo $row['Registration_Number'];?></td>
                         <td><?php echo $row['Chassis_Number']; ?></td>
                         <td class="action-buttons flex">
-                            <button class="sensor-button" onclick="my_modal_1.showModal()">Sensor</button>
-                            <button class="gps-button" onclick="my_modal_2.showModal()">GPS</button>
-                            <button class="scanner-button">Scanner</button>
-                            <button class="scanner-button">Drowsiness</button>
+                          <form action="process_sensorData.php" method="POST">
+                            <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
+                          <button type="submit" class="sensor-button">Sensor</button>
+                          </form>
+                        <form action="process_gpsData.php" method="POST">
+                        <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
+                        <button type="submit" class="gps-button">GPS</button>
+                        </form>
+                        
+                        <button class="scanner-button">Scanner</button>
+                        <button class="scanner-button">Drowsiness</button>
                         </td>
                     </tr>
                 </tbody>
                 <?php } ?>
             </table>
-            <a href="add_car.html"><button class="btn btn-primary">Add Car</button></a>
+            <form action="add_car.php" method="POST">
+              <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
+            <button class="btn btn-primary">Add Car</button>
+            </form>
+            <a href="add_car.html"></a>
         </div>
     </div>
     
@@ -149,17 +182,17 @@ $mysqli->close();
         <th>Air_Pressure</th>
       </tr>
     </thead>
-    <?php while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)){ 
+    <?php while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)){ 
         $index2++;
         ?>
     <tbody>
       <!-- row 1 -->
       <tr class="bg-base-200">
         <td><?php echo $index2?></td>
-        <td><?php echo $row2['Time_Date']; ?></td>
-        <td><?php echo $row2['Temperature']; ?></td>
-        <td><?php echo $row2['Humidity']; ?></td>
-        <td><?php echo $row2['Air_Pressure']; ?></td>
+        <td><?php echo $row5['Time_Date']; ?></td>
+        <td><?php echo $row5['Temperature']; ?></td>
+        <td><?php echo $row5['Humidity']; ?></td>
+        <td><?php echo $row5['Air_Pressure']; ?></td>
       </tr>
       <!-- row 2 -->
       
@@ -216,7 +249,52 @@ $mysqli->close();
   </div>
 </dialog>
     <script >
-        const imageUpload = document.getElementById('image-upload');
+
+function sendRegistrationNumber(registrationNumber) {
+        
+        // Do any additional actions with the registrationNumber, if needed
+
+        // Send the value to a PHP script using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'userprofile.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response from the server, if needed
+                console.log(registrationNumber);
+            }
+        };
+        if(xhr.send("reg_num="+registrationNumber)){
+          console.log('Towsif luchu');
+        }
+        else{
+          console.log('Towsif aro beshi luchu');
+        }
+        ;
+        // Open the modal
+        my_modal_1.showModal();
+    }
+
+
+// function sendRegistrationNumber(button) {
+//         // Get the Registration_Number value from the data-regnum attribute
+//         var registrationNumber = button.getAttribute('data-regnum');
+//     alert('Registration Number: ' + registrationNumber);
+//         // Send the value to a PHP script using AJAX
+//         var xhr = new XMLHttpRequest();
+//         xhr.open('POST', 'userprofile.php', true);
+//         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//         xhr.onreadystatechange = function() {
+//             if (xhr.readyState === 4 && xhr.status === 200) {
+//                 // Handle the response from the server, if needed
+//                 console.log(xhr.responseText);
+//             }
+//         };
+//         xhr.send(registrationNumber);
+//         my_modal_1.showModal();
+//     }
+
+const imageUpload = document.getElementById('image-upload');
 const profilePicture = document.getElementById('profile-picture');
 const userName = document.getElementById('user-name');
 const phone = document.getElementById('phone');
@@ -225,16 +303,16 @@ const numOfCars = document.getElementById('num-of-cars');
 
 
 // Function to handle image upload
-imageUpload.addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+// imageUpload.addEventListener('change', function(event) {
+//     const file = event.target.files[0];
+//     const reader = new FileReader();
 
-    reader.onload = function (e) {
-        profilePicture.style.backgroundImage = `url('${e.target.result}')`;
-    };
+//     reader.onload = function (e) {
+//         profilePicture.style.backgroundImage = url('./uploads/14.jpg');
+//     };
 
-    reader.readAsDataURL(file);
-});
+//     reader.readAsDataURL(file);
+// });
 
 const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSION['user_name']) : 'null'; ?>;
     const userPhone = <?php echo isset($_SESSION['user_phone']) ? json_encode($_SESSION['user_phone']) : 'null'; ?>;
@@ -255,7 +333,7 @@ const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSIO
     });
 
 
-numOfCars.textContent = 'Number of Cars: 3';
+numOfCars.textContent = "Number of Cars:"+<?php echo $index; ?>;
 
 
 

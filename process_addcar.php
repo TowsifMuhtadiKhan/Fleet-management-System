@@ -19,11 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $carModel = $_POST["carModel"];
     $registrationNumber = $_POST["registrationNumber"];
     $chassisNumber = $_POST["chassisNumber"];
+    $email = $_POST["email"];
 
     // You should perform data validation and sanitization here
 
     // Construct the SQL INSERT query
-    $sql = "INSERT INTO addcar (`Car_Type`, `Car_Name`, `Car_Model`, `Registration_Number`, `Chassis_Number`) VALUES ('$carType', '$carName', '$carModel', '$registrationNumber', '$chassisNumber')";
+    $sql = "INSERT INTO addcar (`Car_Type`, `Car_Name`, `Car_Model`, `Registration_Number`, `Chassis_Number`, `Email`) VALUES ('$carType', '$carName', '$carModel', '$registrationNumber', '$chassisNumber', '$email')";
     
     if ($conn->query($sql) === TRUE) {
         echo "Record inserted successfully!";
@@ -42,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while ($row = $result->fetch_assoc()) {
             $carData[] = $row;
         }
-        echo json_encode($carData);
+        header('Location: userprofile.php');
     } else {
         echo 'error'; // No data found
     }

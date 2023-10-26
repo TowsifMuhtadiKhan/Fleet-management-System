@@ -1,3 +1,27 @@
+<?php 
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "fms_db";
+
+$mysqli = new mysqli($servername, $username, $password, $database);
+
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+$sql = "SELECT * FROM users";
+$result = $mysqli->query($sql);
+$index = 0;
+
+$sql2 = "SELECT * FROM addcar";
+$result2 = $mysqli->query($sql2);
+$index2 = 0;
+
+$mysqli->close();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
