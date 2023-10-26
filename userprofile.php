@@ -112,6 +112,9 @@ $mysqli->close();
             <p id="phone">Phone Number</p>
             <p id="email">Email Address</p>
             <p id="num-of-cars">Number of Cars</p>
+            <form action="logout.php" method="POST">
+            <button type="submit" name="logout" class="btn btn-error">Logout</button>
+            </form>
             
         </div>
         <div class="content">
