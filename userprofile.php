@@ -137,7 +137,7 @@ $mysqli->close();
             <button class="btn btn-primary" style="width: 80%;">Add Driver</button>
             </form> <br>
             <form action="logout.php" method="POST">
-            <button type="submit" name="logout" class="btn btn-error custom-btn">Logout</button>
+            <button type="submit" name="logout" class="btn btn-error">Logout</button>
           </form>
             
         </div>

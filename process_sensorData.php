@@ -12,7 +12,7 @@ if ($mysqli->connect_error) {
 
 if (isset($_POST['reg_num'])) {
     $reg_num = $_POST['reg_num'];
-    $sql = "SELECT * FROM sensor_data WHERE `Registration_Number` = '$reg_num'";
+    $sql = "SELECT * FROM sensor WHERE `registrationNumber` = '$reg_num'";
     $result = $mysqli->query($sql);
     $index2 = 0;
     // You can use $reg_num as needed here
@@ -37,7 +37,7 @@ if (isset($_POST['reg_num'])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
             margin: 0 auto;
         }
 
@@ -70,15 +70,14 @@ if (isset($_POST['reg_num'])) {
                     $index2++;
                     ?>
                 <tbody>
-                    <!-- row 1 -->
+                    
                     <tr class="border">
                         <td class="border p-2"><?php echo $index2?></td>
-                        <td class="border p-2"><?php echo $row['Time_Date']; ?></td>
-                        <td class="border p-2"><?php echo $row['Temperature']; ?></td>
-                        <td class="border p-2"><?php echo $row['Humidity']; ?></td>
-                        <td class="border p-2"><?php echo $row['Air_Pressure']; ?></td>
-                    </tr>
-                    <!-- row 2 -->
+                        <td class="border p-2"><?php echo $row['Date_Time']; ?></td>
+                        <td class="border p-2"><?php echo $row['temperature']; ?></td>
+                        <td class="border p-2"><?php echo $row['humidity']; ?></td>
+                        <td class="border p-2"><?php echo $row['air_pressure']; ?></td>
+                    </tr> 
                     
                 </tbody>
                 <?php } ?>

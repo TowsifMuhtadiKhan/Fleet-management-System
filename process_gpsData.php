@@ -12,7 +12,7 @@ if ($mysqli->connect_error) {
 
 if (isset($_POST['reg_num'])) {
     $reg_num = $_POST['reg_num'];
-    $sql = "SELECT * FROM gps_data WHERE `Registration_Number` = '$reg_num'";
+    $sql = "SELECT * FROM sensor WHERE `registrationNumber` = '$reg_num'";
     $result = $mysqli->query($sql);
     $index2 = 0;
     // You can use $reg_num as needed here
@@ -36,7 +36,7 @@ if (isset($_POST['reg_num'])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
             margin: 0 auto;
         }
 
@@ -72,9 +72,9 @@ if (isset($_POST['reg_num'])) {
       <!-- row 1 -->
       <tr class="border">
         <td class="border p-2"><?php echo $index2?></td>
-        <td class="border p-2"><?php echo $row['Time_Data']; ?></td>
-        <td class="border p-2"><?php echo $row['Longitude']; ?></td>
-        <td class="border p-2"><?php echo $row['Latitude']; ?></td>
+        <td class="border p-2"><?php echo $row['Date_Time']; ?></td>
+        <td class="border p-2"><?php echo $row['longitude']; ?></td>
+        <td class="border p-2"><?php echo $row['latitude']; ?></td>
       </tr>
       <!-- row 2 -->
       
