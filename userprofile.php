@@ -65,14 +65,22 @@ if (isset($_POST['reg_num'])) {
   // You can use $reg_num as needed here
   echo $reg_num;
 } else {
-  echo "Registration Number not received.";
+  
 }
 $sql5 = "SELECT * FROM sensor_data WHERE `Registration_Number` = '$reg_num'";
 $result5 = $mysqli->query($sql5);
 
+
+
+
+$sql6 = "SELECT * FROM adddriver WHERE `Email` = '$userEmail'";
+$result6 = $mysqli->query($sql6);
+$index6 = 0;
+
+
 $mysqli->close();
 ?>
-<body>
+<body style="background-color: white;">
 <!-- Home Page Starts Here -->
 
     <!-- NavBAr Section Starts here -->
@@ -99,6 +107,9 @@ $mysqli->close();
       <!-- NavBAr Section Ends here -->
       <div class="dashboard-container">
         <div class="profile-card">
+
+        <h2 style="font-size: 30px; color:black"><b>Welcome to your Profile</b></h2><br>
+
             
                 
             <form action="upload.php" method="POST" enctype="multipart/form-data">
@@ -106,19 +117,33 @@ $mysqli->close();
         <input type="hidden" name="uemail" value=<?php echo $userEmail; ?> >
         <button type="submit" name="upload">Upload</button>
     </form>
+
     <div class="profile-picture" id="profile-picture" style="background-image: url('<?php echo $image_path; ?>')"></div>   
     
             <h2 id="user-name">User Name</h2>
             <p id="phone">Phone Number</p>
             <p id="email">Email Address</p>
             <p id="num-of-cars">Number of Cars</p>
+
+            <br>
+            <form action="add_car.php" method="POST">
+              <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
+            <button class="btn btn-primary" style="width: 80%; background-color: rgb(4, 182, 84); transition: background-color 0.3s ease;">Add Car</button>
+
+            </form> <br>
+
+            <form action="add_driver.php" method="POST">
+              <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
+            <button class="btn btn-primary" style="width: 80%;">Add Driver</button>
+            </form> <br>
             <form action="logout.php" method="POST">
-            <button type="submit" name="logout" class="btn btn-error">Logout</button>
-            </form>
+            <button type="submit" name="logout" class="btn btn-error custom-btn">Logout</button>
+          </form>
             
         </div>
         <div class="content">
-            <h2>Car Information</h2>
+        <h2 style="background-color: rgb(4, 182, 84); padding: 10px;color: white;"><b>Car Information</b></h2><br>
+
             <table id="car-table">
                 <thead>
                     <tr>
@@ -134,6 +159,7 @@ $mysqli->close();
                 <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){  
                     $index++;
                     ?>
+
                 <tbody id="car-table-body">
                     <tr>
                         <td><?php echo $index; ?></td>
@@ -159,11 +185,44 @@ $mysqli->close();
                 </tbody>
                 <?php } ?>
             </table>
-            <form action="add_car.php" method="POST">
+            <!-- <form action="add_car.php" method="POST">
               <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
-            <button class="btn btn-primary">Add Car</button>
-            </form>
+            <button class="btn btn-primary" style="width: 80%;">Add Car</button>
+            </form> -->
             <a href="add_car.html"></a>
+            <h2 style="background-color: rgb(4, 182, 84); padding: 10px;color: white;"><b>Driver Information</b></h2>
+                  <br>
+            <table id="car-table">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Driver Name</th>
+                        <th>Driver's Contact No.</th>
+                        <th>License Number</th>
+                        <th>License Expired Date</th>
+                       
+                    </tr>
+                </thead>
+                <?php while($row = mysqli_fetch_array($result6, MYSQLI_ASSOC)){  
+                    $index6++;
+                    ?>
+                <tbody id="car-table-body">
+                    <tr>
+                        <td><?php echo $index6; ?></td>
+                        <td><?php echo $row['Driver_Name']; ?></td>
+                        <td><?php echo $row['Driver_Number']; ?></td>
+                        <td><?php echo $row['License_Number']; ?></td>
+                        <td><?php echo $row['License_Expired'];?></td>
+                
+                </tbody>
+                <?php } ?>
+            </table>
+
+           
+
+            
+
+            
         </div>
     </div>
     
@@ -253,30 +312,7 @@ $mysqli->close();
 </dialog>
     <script >
 
-function sendRegistrationNumber(registrationNumber) {
-        
-        // Do any additional actions with the registrationNumber, if needed
 
-        // Send the value to a PHP script using AJAX
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'userprofile.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Handle the response from the server, if needed
-                console.log(registrationNumber);
-            }
-        };
-        if(xhr.send("reg_num="+registrationNumber)){
-          console.log('Towsif luchu');
-        }
-        else{
-          console.log('Towsif aro beshi luchu');
-        }
-        ;
-        // Open the modal
-        my_modal_1.showModal();
-    }
 
 
 // function sendRegistrationNumber(button) {
@@ -317,9 +353,9 @@ const numOfCars = document.getElementById('num-of-cars');
 //     reader.readAsDataURL(file);
 // });
 
-const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSION['user_name']) : 'null'; ?>;
-    const userPhone = <?php echo isset($_SESSION['user_phone']) ? json_encode($_SESSION['user_phone']) : 'null'; ?>;
-    const userEmail = <?php echo isset($_SESSION['user_email']) ? json_encode($_SESSION['user_email']) : 'null'; ?>;
+    const username = "User Name: "+<?php echo isset($_SESSION['user_name']) ? json_encode($_SESSION['user_name']) : 'null'; ?>;
+    const userPhone = "Phone Number: "+<?php echo isset($_SESSION['user_phone']) ? json_encode($_SESSION['user_phone']) : 'null'; ?>;
+    const userEmail = "Email Address: "+<?php echo isset($_SESSION['user_email']) ? json_encode($_SESSION['user_email']) : 'null'; ?>;
 
     // Display user details
     document.addEventListener('DOMContentLoaded', function() {
@@ -337,10 +373,6 @@ const username = <?php echo isset($_SESSION['user_name']) ? json_encode($_SESSIO
 
 
 numOfCars.textContent = "Number of Cars:"+<?php echo $index; ?>;
-
-
-
-
 
 
 

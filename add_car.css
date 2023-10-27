@@ -81,6 +81,15 @@ img {
     color: red;
     font-size: 14px;
 }
+
+select {
+    width: calc(100%);
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 @media (max-width: 650px) {
     img {
         max-width: 100%; /* Ensures the image does not exceed its original size */

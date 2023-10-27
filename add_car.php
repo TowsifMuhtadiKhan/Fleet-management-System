@@ -26,12 +26,37 @@ if (isset($_POST['uemail'])) {
         <form id="signupForm" action="process_addcar.php" method="post">
             <div class="input-group">
                 <label for="name">Car Type</label>
-                <input type="text" id="name" name="carType" required>
+                <select id="carType" name="carType" required>
+                    <option value="JEEP">JEEP</option>
+                    <option value="SUV">SUV</option>
+                    <option value="SEDAN">SEDAN</option>
+                    <option value="MINI TRUCK">MINI TRUCK</option>
+                    <option value="TRUCK">TRUCK</option>
+                    <option value="BUS">BUS</option>
+                    <option value="COVER VAN">COVER VAN</option>
+                </select>
             </div>
+
+         
             <div class="input-group">
                 <label for="phone">Car Name</label>
-                <input type="text" id="phone" name="carName" required>
+                <select id="carName" name="carName" required>
+                    <option value="TOYOTA">TOYOTA</option>
+                    <option value="NISSAN">NISSAN</option>
+                    <option value="SUZUKI">SUZUKI</option>
+                    <option value="MITSUBISHI">MITSUBISHI</option>
+                    <option value="BMW">BMW</option>
+                    <option value="AUDI">AUDI</option>
+                    <option value="HYUNDAI">HYUNDAI</option>
+                    <option value="JEEP">JEEP</option>
+                    <option value="TATA">TATA</option>
+                    <option value="MERCEDES BENZ">MERCEDES BENZ</option>
+                    <option value="LEXUS">LEXUS</option>
+                </select>
+
+                
             </div>
+            
             <div class="input-group">
                 <label for="email">Car Model</label>
                 <input type="text" id="email" name="carModel" required>
