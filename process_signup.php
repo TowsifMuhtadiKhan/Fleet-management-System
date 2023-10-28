@@ -35,7 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     else if ($conn->query($sql) === TRUE) {
         // Successfully registered
-        echo "Registration successful!";
+        // echo "Registration successful!";
+        header('Location:login.html');
+
     } else {
         // Error occurred
         echo "Error: " . $sql . "<br>" . $conn->error;

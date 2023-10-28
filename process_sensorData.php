@@ -51,7 +51,7 @@ if (isset($_POST['reg_num'])) {
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100" style="color: black;">
     <div class="container">
         <div class="table-container p-6 bg-white rounded-lg shadow-lg">
             <h3 class="font-bold text-lg mb-4">Sensor Data</h3>

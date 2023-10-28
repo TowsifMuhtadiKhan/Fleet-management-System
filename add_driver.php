@@ -17,7 +17,9 @@ if (isset($_POST['uemail'])) {
 
 <body>
     <div class="logo">
+        <a href="index.html">
         <img src="image/logo.png" alt="Girl in a jacket"  >
+        </a>
     </div>
     
     <div class="login-container">

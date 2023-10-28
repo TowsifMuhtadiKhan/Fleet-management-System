@@ -80,14 +80,16 @@ $index6 = 0;
 
 $mysqli->close();
 ?>
-<body style="background-color: white;">
+<body style="background-color: white; color: black;">
 <!-- Home Page Starts Here -->
 
     <!-- NavBAr Section Starts here -->
     <nav>
 
-        <div class="logo">
+    <div class="logo">
+        <a href="index.html">
           <img src="image/logo.png" alt="Girl in a jacket" width="250" >
+        </a>  
         </div>
 
         <input type="checkbox" id="click">
@@ -96,11 +98,9 @@ $mysqli->close();
         </label>
 
         <ul>
-          <li><a class="active" href="#">Home</a></li>
-          <li><a href="#aboutus">About Us</a></li>
-          <li><a href="#features">Feature</a></li>
-          <li><a href="#contactus">Contact</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a class="active" href="index.html">Home</a></li>
+          
+          
         </ul>
 
       </nav>
@@ -115,7 +115,7 @@ $mysqli->close();
             <form action="upload.php" method="POST" enctype="multipart/form-data">
         <input type="file" id="image-upload" name="image" accept="image/*" required>
         <input type="hidden" name="uemail" value=<?php echo $userEmail; ?> >
-        <button type="submit" name="upload">Upload</button>
+        <button type="submit" name="upload" class="button3">Upload</button>
     </form>
 
     <div class="profile-picture" id="profile-picture" style="background-image: url('<?php echo $image_path; ?>')"></div>   
@@ -128,17 +128,18 @@ $mysqli->close();
             <br>
             <form action="add_car.php" method="POST">
               <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
-            <button class="btn btn-primary" style="width: 80%; background-color: rgb(4, 182, 84); transition: background-color 0.3s ease;">Add Car</button>
+            <button class="button1" ">Add Car</button>
 
             </form> <br>
 
             <form action="add_driver.php" method="POST">
               <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
-            <button class="btn btn-primary" style="width: 80%;">Add Driver</button>
+              <button class="button1" ;">Add Driver</button>
             </form> <br>
             <form action="logout.php" method="POST">
-            <button type="submit" name="logout" class="btn btn-error">Logout</button>
-          </form>
+                <button type="submit" name="logout" class="button-custom">Logout</button>
+            </form>
+            
             
         </div>
         <div class="content">
@@ -147,13 +148,14 @@ $mysqli->close();
             <table id="car-table">
                 <thead>
                     <tr>
-                        <th>Sl</th>
-                        <th>Car Type</th>
-                        <th>Car Name</th>
-                        <th>Car Model</th>
-                        <th>Registration Number</th>
-                        <th>Chassis Number</th>
-                        <th>Action</th>
+                        <th >Sl</th>
+                        <th >Car Type</th>
+                        <th >Car Name</th>
+                        <th >Car Model</th>
+                        <th >Registration Number</th>
+                        <th >Chassis Number</th>
+                      
+                        <th >Action</th>
                     </tr>
                 </thead>
                 <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){  
@@ -162,24 +164,34 @@ $mysqli->close();
 
                 <tbody id="car-table-body">
                     <tr>
-                        <td><?php echo $index; ?></td>
-                        <td><?php echo $row['Car_Type']; ?></td>
-                        <td><?php echo $row['Car_Name']; ?></td>
-                        <td><?php echo $row['Car_Model']; ?></td>
-                        <td><?php echo $row['Registration_Number'];?></td>
-                        <td><?php echo $row['Chassis_Number']; ?></td>
+                        <td ><?php echo $index; ?></td>
+                        <td ><?php echo $row['Car_Type']; ?></td>
+                        <td ><?php echo $row['Car_Name']; ?></td>
+                        <td ><?php echo $row['Car_Model']; ?></td>
+                        <td ><?php echo $row['Registration_Number'];?></td>
+                        <td ><?php echo $row['Chassis_Number']; ?></td>
                         <td class="action-buttons flex">
-                          <form action="process_sensorData.php" method="POST">
+                            <form action="process_sensorData.php" method="POST">
+                                <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
+                                <button type="submit" class="sensor-button">Sensor</button>
+                             </form>
+                            <form action="process_gpsData.php" method="POST">
+                                <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
+                                <button type="submit" class="gps-button">GPS</button>
+                            </form>
+                                <button class="scanner-button">Scanner</button>
+                                <button class="drowsiness-button">Drowsiness</button>
+                       
+                        <form action="process_updatecarData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                             <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
-                          <button type="submit" class="sensor-button">Sensor</button>
-                          </form>
-                        <form action="process_gpsData.php" method="POST">
-                        <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
-                        <button type="submit" class="gps-button">GPS</button>
-                        </form>
-                        
-                        <button class="scanner-button">Scanner</button>
-                        <button class="scanner-button">Drowsiness</button>
+                                
+                                <button type="submit" class="updatebutton2">Updatde</button>
+                            </form>      <br>
+                            <form action="process_removeData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                            <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
+                                
+                                <button type="submit" class="removebutton2">Remove</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
@@ -195,11 +207,12 @@ $mysqli->close();
             <table id="car-table">
                 <thead>
                     <tr>
-                        <th>Sl</th>
-                        <th>Driver Name</th>
-                        <th>Driver's Contact No.</th>
-                        <th>License Number</th>
-                        <th>License Expired Date</th>
+                        <th >Sl</th>
+                        <th >Driver Name</th>
+                        <th >Driver's Contact No.</th>
+                        <th >License Number</th>
+                        <th >License Expired Date</th>
+                        <th >Action</th>
                        
                     </tr>
                 </thead>
@@ -213,6 +226,23 @@ $mysqli->close();
                         <td><?php echo $row['Driver_Number']; ?></td>
                         <td><?php echo $row['License_Number']; ?></td>
                         <td><?php echo $row['License_Expired'];?></td>
+                        <td class="action-buttons flex" >
+                        <form action="process_updatecarData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                            <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
+                                
+                                <button type="submit" class="updatebutton2">Updatde</button>
+                            </form>      <br>
+                        <form action="process_removeDriver.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                    <!-- Hidden input field to store unique identifier -->
+                        <input type="hidden" name="driverName" value="<?php echo $row['Driver_Name']; ?>">
+                        <!-- Visible input fields (optional) for reference -->
+                        <input type="hidden" name="driverNumber" value="<?php echo $row['Driver_Number']; ?>">
+                        <input type="hidden" name="licenseNumber" value="<?php echo $row['License_Number']; ?>">
+                        <input type="hidden" name="licenseExpired" value="<?php echo $row['License_Expired']; ?>">
+                    <!-- Submit button to delete the record -->
+                    <button type="submit" class="removeButton">Remove</button>
+                </form>
+                        </td>
                 
                 </tbody>
                 <?php } ?>
@@ -353,9 +383,9 @@ const numOfCars = document.getElementById('num-of-cars');
 //     reader.readAsDataURL(file);
 // });
 
-    const username = "User Name: "+<?php echo isset($_SESSION['user_name']) ? json_encode($_SESSION['user_name']) : 'null'; ?>;
-    const userPhone = "Phone Number: "+<?php echo isset($_SESSION['user_phone']) ? json_encode($_SESSION['user_phone']) : 'null'; ?>;
-    const userEmail = "Email Address: "+<?php echo isset($_SESSION['user_email']) ? json_encode($_SESSION['user_email']) : 'null'; ?>;
+    const username = "User Name : "+<?php echo isset($_SESSION['user_name']) ? json_encode($_SESSION['user_name']) : 'null'; ?>;
+    const userPhone = "Phone Number : "+<?php echo isset($_SESSION['user_phone']) ? json_encode($_SESSION['user_phone']) : 'null'; ?>;
+    const userEmail = "Email Address : "+<?php echo isset($_SESSION['user_email']) ? json_encode($_SESSION['user_email']) : 'null'; ?>;
 
     // Display user details
     document.addEventListener('DOMContentLoaded', function() {
@@ -372,7 +402,7 @@ const numOfCars = document.getElementById('num-of-cars');
     });
 
 
-numOfCars.textContent = "Number of Cars:"+<?php echo $index; ?>;
+numOfCars.textContent = "Number of Cars : "+<?php echo $index; ?>;
 
 
 

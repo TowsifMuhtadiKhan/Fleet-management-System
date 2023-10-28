@@ -43,14 +43,16 @@ $result4 = $mysqli->query($sql3);
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body style="background-color: white; color: black;">
 <!-- Home Page Starts Here -->
 
     <!-- NavBAr Section Starts here -->
     <nav>
 
         <div class="logo">
+        <a href="index.html">
           <img src="image/logo.png" alt="Girl in a jacket" width="250" >
+        </a>  
         </div>
 
         <input type="checkbox" id="click">
@@ -59,48 +61,45 @@ $result4 = $mysqli->query($sql3);
         </label>
 
         <ul class="flex items-center">
-          <li><a class="active" href="#">Home</a></li>
-          <li><a href="#aboutus">About Us</a></li>
-          <li><a href="#features">Feature</a></li>
-          <li><a href="#contactus">Contact</a></li>
-          <form action="logout.php" method="POST">
-            <button type="submit" name="logout" class="btn btn-error custom-btn">Logout</button>
-          </form>
+          <li><a  href="index.html">Home</a></li>  
         </ul>
 
       </nav>
-      
-        
-      
-        <!-- Rest of your content here -->
-        <div class="welcome-message text-3xl font-bold">
-          <h1>Welcome to the Admin Dashboard Panel</h1>
-      </div>
-      <br>
-      <br>
-      <!-- NavBAr Section Ends here -->
-      <div class="dashboard-header">
-        <div class="info-box">
-            <div class="icon">&#128100;</div>
-            <div class="info">Total Registered Users: <span id="totalUsers"><?php echo $result4->num_rows; ?></span></div>
-        </div>
-        <div class="info-box">
-            <div class="icon">&#128663;</div>
-            <div class="info">Total Registered Cars: <span id="totalCars"><?php echo $result->num_rows; ?></span></div>
-        </div>
-        <div class="info-box">
-          <div class="icon">&#128100;</div>
-          <div class="info">Total Registered Drivers: <span id="totalUsers"><?php echo $result3->num_rows; ?></span></div>
-      </div>
-    </div>
+<div class="container">
+  <div class="left-column">
+          <h1 class="welcomeText"><b>Welcome to the Admin Dashboard</b></h1>
+     
+          <div class="dashboard-header">
+                    <div class="info-box">
+                        <div class="icon">&#128100;</div>
+                        <div class="info">Total Registered Users: <span id="totalUsers"><?php echo $result4->num_rows; ?></span></div>
+                    </div><br>
+                    <div class="info-box">
+                        <div class="icon">&#128663;</div>
+                        <div class="info">Total Registered Cars: <span id="totalCars"><?php echo $result->num_rows; ?></span></div>
+                    </div><br>
+                    <div class="info-box">
+                      <div class="icon">&#128100;</div>
+                      <div class="info">Total Registered Drivers: <span id="totalUsers"><?php echo $result3->num_rows; ?></span></div>
+                  </div><br>
+                  <a href="#userinfo" class="custom-button2">User Information</a><br>
+                  <a href="#cardetails" class="custom-button2">Car Details</a><br>
+                  <a href="#driverinfo" class="custom-button2">Driver Information</a><br>
+                  <a href="signup.html"><button type="" name="" class="buttonCustom3">Add User</button></a><br>
+                  <form action="logout.php" method="POST">
+                    <button type="submit" name="logout" class="button-custom">Logout</button>
+                  </form>
+          </div>
 
-    <div class="welcome-message2">
-      <p><b>User Information</b></p>
+  </div>
+  <div class="right-column">
+  <div class="welcome-message2">
+      <p id="userinfo"><b>User Information</b></p>
     </div>
 
     <div class="search-container">
         <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search...">
+        <input type="text" id="search" placeholder="Search..." style="background-color: white;">
     </div>
 
     <table id="data-table">
@@ -113,6 +112,7 @@ $result4 = $mysqli->query($sql3);
       <th>Car Model</th>
       <th>Car Type</th>
       <th>Registration Number</th>
+      <th>Action</th>
     </tr>
       </thead>
       <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){  
@@ -127,6 +127,18 @@ $result4 = $mysqli->query($sql3);
           <td><?php echo $row['Car_Model'] ?></td>
           <td><?php echo $row['Car_Type'] ?></td>
           <td><?php echo $row['Registration_Number'] ?></td>
+          <td>
+          <form action="process_removeUser.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                    <!-- Hidden input field to store unique identifier -->
+                        <input type="hidden" name="driverName" value="<?php echo $row['Driver_Name']; ?>">
+                        <!-- Visible input fields (optional) for reference -->
+                        <input type="hidden" name="driverNumber" value="<?php echo $row['Driver_Number']; ?>">
+                        <input type="hidden" name="licenseNumber" value="<?php echo $row['License_Number']; ?>">
+                        <input type="hidden" name="licenseExpired" value="<?php echo $row['License_Expired']; ?>">
+                    <!-- Submit button to delete the record -->
+                    <button type="submit" class="removeButton">Remove</button>
+          </form>
+          </td>
           
         </tr>
       </tbody>
@@ -135,12 +147,12 @@ $result4 = $mysqli->query($sql3);
 
     <!-- Car Details -->
     <div class="welcome-message2">
-      <p><b>Car Details</b></p>
+      <p id="cardetails"><b>Car Details</b></p>
     </div>
 
     <div class="search-container">
         <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search...">
+        <input type="text" id="search" placeholder="Search..." style="background-color: white;">
     </div>
 
     <table id="data-table">
@@ -177,12 +189,12 @@ $result4 = $mysqli->query($sql3);
 
     <!-- Driver Details -->
     <div class="welcome-message2">
-      <p><b>Driver's Information</b></p>
+      <p id="driverinfo"><b>Driver's Information</b></p>
     </div>
 
     <div class="search-container">
         <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search...">
+        <input type="text" id="search" placeholder="Search..."style="background-color: white;">
     </div>
 
     <table id="data-table">
@@ -207,17 +219,19 @@ $result4 = $mysqli->query($sql3);
           <td><?php echo $row3['Driver_Name'] ?></td>
           <td><?php echo $row3['Driver_Number'] ?></td>
           <td><?php echo $row3['License_Number'] ?></td>
-          <td><?php echo $row3['License_Expired'] ?></td>
-      
-          
+          <td><?php echo $row3['License_Expired'] ?></td>     
         </tr>
       </tbody>
     <?php } ?>
     </table>
 
-    
+  </div>
 
-    <script >
+
+
+</div>
+ 
+<script >
        
 
 const totalUsers = document.getElementById('totalUsers');
