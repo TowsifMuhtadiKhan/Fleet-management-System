@@ -130,11 +130,7 @@ $result4 = $mysqli->query($sql3);
           <td>
           <form action="process_removeUser.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                     <!-- Hidden input field to store unique identifier -->
-                        <input type="hidden" name="driverName" value="<?php echo $row['Driver_Name']; ?>">
-                        <!-- Visible input fields (optional) for reference -->
-                        <input type="hidden" name="driverNumber" value="<?php echo $row['Driver_Number']; ?>">
-                        <input type="hidden" name="licenseNumber" value="<?php echo $row['License_Number']; ?>">
-                        <input type="hidden" name="licenseExpired" value="<?php echo $row['License_Expired']; ?>">
+                       
                     <!-- Submit button to delete the record -->
                     <button type="submit" class="removeButton">Remove</button>
           </form>

@@ -70,12 +70,12 @@ if (isset($_POST['reg_num'])) {
 $sql5 = "SELECT * FROM sensor_data WHERE `Registration_Number` = '$reg_num'";
 $result5 = $mysqli->query($sql5);
 
-
-
-
 $sql6 = "SELECT * FROM adddriver WHERE `Email` = '$userEmail'";
 $result6 = $mysqli->query($sql6);
 $index6 = 0;
+
+$sql7 = "SELECT * FROM users WHERE `Email` = '$userEmail'";
+$result7 = $mysqli->query($sql7);
 
 
 $mysqli->close();
@@ -181,12 +181,12 @@ $mysqli->close();
                             </form>
                                 <button class="scanner-button">Scanner</button>
                                 <button class="drowsiness-button">Drowsiness</button>
-                       
-                        <form action="process_updatecarData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                            <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
-                                
-                                <button type="submit" class="updatebutton2">Updatde</button>
-                            </form>      <br>
+
+                                <form action="updateCar.php" method="POST">
+                          <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number'] ?>">
+                        <button type="submit" class="updatebutton2">Update</button>
+                        </form>
+                                 <br>
                             <form action="process_removeData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                             <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
                                 
@@ -227,11 +227,12 @@ $mysqli->close();
                         <td><?php echo $row['License_Number']; ?></td>
                         <td><?php echo $row['License_Expired'];?></td>
                         <td class="action-buttons flex" >
-                        <form action="process_updatecarData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                            <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
-                                
-                                <button type="submit" class="updatebutton2">Updatde</button>
-                            </form>      <br>
+                        <form action="updateDriver.php" method="POST">
+                          <input type="hidden" name="lnum" value="<?php echo $row['License_Number'] ?>">
+                        <button type="submit" class="updatebutton2">Update</button>
+                        </form>
+                        
+                        <br>
                         <form action="process_removeDriver.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                     <!-- Hidden input field to store unique identifier -->
                         <input type="hidden" name="driverName" value="<?php echo $row['Driver_Name']; ?>">
@@ -248,98 +249,10 @@ $mysqli->close();
                 <?php } ?>
             </table>
 
-           
-
-            
-
-            
         </div>
     </div>
     
-    <dialog id="my_modal_1" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box w-full">
-    <h3 class="font-bold text-lg">Sensor Data</h3>
     
-    <div class="modal-action">
-      <form method="dialog">
-      <div class="">
-  <table>
-    <!-- head -->
-    <thead>
-      <tr>
-        <th>Sl no</th>
-        <th>Time & Date</th>
-        <th>Temperature</th>
-        <th>Humidity</th>
-        <th>Air_Pressure</th>
-      </tr>
-    </thead>
-    <?php while($row5 = mysqli_fetch_array($result5, MYSQLI_ASSOC)){ 
-        $index2++;
-        ?>
-    <tbody>
-      <!-- row 1 -->
-      <tr class="bg-base-200">
-        <td><?php echo $index2?></td>
-        <td><?php echo $row5['Time_Date']; ?></td>
-        <td><?php echo $row5['Temperature']; ?></td>
-        <td><?php echo $row5['Humidity']; ?></td>
-        <td><?php echo $row5['Air_Pressure']; ?></td>
-      </tr>
-      <!-- row 2 -->
-      
-    </tbody>
-    <?php } ?>
-  </table>
-</div>
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-    
-<dialog id="my_modal_2" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box w-full">
-    <h3 class="font-bold text-lg">GPS Data</h3>
-    
-    <div class="modal-action">
-      <form method="dialog">
-      <div class="">
-  <table>
-    <!-- head -->
-    <thead>
-      <tr>
-        <th>Sl no</th>
-        <th>Time & Date</th>
-        <th>Longitude</th>
-        <th>Latitude</th>
-        
-      </tr>
-    </thead>
-    <?php while($row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC)){ 
-        $index3++;
-        ?>
-    <tbody>
-      <!-- row 1 -->
-      <tr class="bg-base-200">
-        <td><?php echo $index3?></td>
-        <td><?php echo $row3['Time_Data']; ?></td>
-        <td><?php echo $row3['Longitude']; ?></td>
-        <td><?php echo $row3['Latitude']; ?></td>
-      </tr>
-      <!-- row 2 -->
-      
-    </tbody>
-    <?php } ?>
-  </table>
-</div>
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
     <script >
 
 
