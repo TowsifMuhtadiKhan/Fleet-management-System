@@ -128,13 +128,13 @@ $mysqli->close();
             <br>
             <form action="add_car.php" method="POST">
               <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
-            <button class="button1" ">Add Car</button>
+            <button class="button1">Add Car</button>
 
             </form> <br>
 
             <form action="add_driver.php" method="POST">
               <input type="hidden" name="uemail" value="<?php echo $userEmail; ?>">
-              <button class="button1" ;">Add Driver</button>
+              <button class="button1">Add Driver</button>
             </form> <br>
             <form action="logout.php" method="POST">
                 <button type="submit" name="logout" class="button-custom">Logout</button>
