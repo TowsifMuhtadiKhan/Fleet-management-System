@@ -73,7 +73,7 @@ if(isset($_POST['licnum'])){
                 <input type="text" id="lexdate" name="lexdate" value="<?php echo $row['License_Expired']; ?>" required>
             </div>
           
-            <button type="submit">Update Driver Info</button>
+            <button type="submit">Update</button>
         </form>       
         </div>     
 </body>

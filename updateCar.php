@@ -101,7 +101,7 @@ if(isset($_POST['regs_num'])){
                 <label for="password">Chassis Number</label>
                 <input type="text" id="csnum" name="csnum" value="<?php echo $row['Chassis_Number']; ?>" required>
             </div>
-            <button type="submit">Updtae</button>
+            <button type="submit">Update</button>
         </form>       
         </div>      
 </body>
