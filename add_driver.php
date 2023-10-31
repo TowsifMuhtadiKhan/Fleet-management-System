@@ -40,7 +40,7 @@ if (isset($_POST['uemail'])) {
             </div>
             <div class="input-group">
                 <label for="username">License Expired</label>
-                <input type="text" id="username" name="licenseExpired" required>
+                <input type="date" id="username" name="licenseExpired" required>
             </div>
 
 

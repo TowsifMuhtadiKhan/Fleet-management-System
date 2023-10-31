@@ -38,31 +38,73 @@ if(isset($_POST['regs_num'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="add_car.css">
+    <title>Add_Car</title>
 </head>
-<body>
-<form action="updateCar.php" method="POST">
-     
-     <label for="ctype">Car Type</label>
-     <input type="text" name="ctype" id="ctype" value="<?php echo $row['Car_Type']; ?>">
-     <br><br>
-     <label for="cname">Car Name</label>
-     <input type="text" name="cname" id="cname" value="<?php echo $row['Car_Name']; ?>">
-     <br><br>
-     <label for="cmodel">Car Model</label>
-     <input type="text" name="cmodel" id="cmodel" value="<?php echo $row['Car_Model']; ?>" readonly>
-     <br><br>
-     <label for="regs_num">Registration Number</label>
-     <input type="text" name="regs_num" id="regs_num" value="<?php echo $row['Registration_Number']; ?>" readonly>
-     <label for="csnum">Chassis Number</label>
-     <input type="text" name="csnum" id="csnum" value="<?php echo $row['Chassis_Number']; ?>">
 
-     <br><br>
-     
-     <button type="submit" class="btn">Update</button>
-   </form>
+<body>
+    <div class="logo">
+        <a href="index.html">
+        <img src="image/logo.png" alt="Girl in a jacket"  >
+        </a>
+    </div>
+    
+    <div class="login-container">
+        
+        <h2>Update Your Car Info <br><span class="colored-text">Fleet</span> Management</h2>
+        <form id="signupForm" action="updateCar.php" method="post">
+            <div class="input-group">
+            <label for="ctype">Car Type</label>
+                <select id="ctype" name="ctype" required>
+                    <option value="<?php echo $row['Car_Type']; ?>" selected><?php echo $row['Car_Type']; ?> </option>
+                    <option value="JEEP">JEEP</option>
+                    <option value="SUV">SUV</option>
+                    <option value="SEDAN">SEDAN</option>
+                    <option value="MINI TRUCK">MINI TRUCK</option>
+                    <option value="TRUCK">TRUCK</option>
+                    <option value="BUS">BUS</option>
+                    <option value="COVER VAN">COVER VAN</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="cname">Car Name</label>
+                <select id="cname" name="cname" required>
+                    <option value="<?php echo $row['Car_Name']; ?>" selected><?php echo $row['Car_Name']; ?></option>
+                    <option value="TOYOTA">TOYOTA</option>
+                    <option value="NISSAN">NISSAN</option>
+                    <option value="SUZUKI">SUZUKI</option>
+                    <option value="MITSUBISHI">MITSUBISHI</option>
+                    <option value="BMW">BMW</option>
+                    <option value="AUDI">AUDI</option>
+                    <option value="HYUNDAI">HYUNDAI</option>
+                    <option value="JEEP">JEEP</option>
+                    <option value="TATA">TATA</option>
+                    <option value="MERCEDES BENZ">MERCEDES BENZ</option>
+                    <option value="LEXUS">LEXUS</option>
+                </select>
+            </div>       
+            <div class="input-group">
+                <label for="cmodel">Car Model</label>
+                <input type="text" id="cmodel" name="cmodel" value="<?php echo $row['Car_Model']; ?>" required>
+            </div>
+            <div class="input-group">
+                <label for="regs_num">Registration Number</label>
+                <input type="text" id="regs_num" name="regs_num" value="<?php echo $row['Registration_Number']; ?>" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Chassis Number</label>
+                <input type="text" id="csnum" name="csnum" value="<?php echo $row['Chassis_Number']; ?>" required>
+            </div>
+            <button type="submit">Updtae</button>
+        </form>       
+        </div>      
 </body>
 </html>
+
+
