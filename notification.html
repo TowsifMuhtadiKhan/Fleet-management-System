@@ -1,0 +1,138 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Notification</title>
+</head>
+
+<body>
+    <h1>Temperature Notification</h1>
+    <div id="notification"></div>
+
+    <script>
+    function show_notification() {
+    var notificationDiv = document.getElementById("notification");
+    notificationDiv.innerHTML = "Temperature is over 20°C!";
+
+    // You can style the notification here
+    notificationDiv.style.backgroundColor = "red";
+    notificationDiv.style.color = "white";
+    notificationDiv.style.padding = "10px";
+    notificationDiv.style.borderRadius = "5px";
+
+    // Add additional styling or animations as needed
+
+    // Hide the notification after a certain period (e.g., 5 seconds)
+    // setTimeout(function () {
+    //     notificationDiv.innerHTML = "";
+    // }, 5000); // 5000 milliseconds = 5 seconds
+    //     }
+
+        // Fetch data from PHP script every 5 seconds
+        setInterval(function () {
+            fetch("graph_process.php")
+                .then(response => response.text())
+                .then(data => {
+                    // Execute the returned JavaScript code
+                    eval(data);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }, 5000); // 5000 milliseconds = 5 seconds
+
+    </script>
+</body>
+
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Notification</title>
+</head>
+
+<body>
+    <div id="notification"></div>
+
+    <script>
+        function showNotification(message) {
+            var notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = message;
+            document.getElementById('notification').appendChild(notification);
+        }
+
+        // Load the PHP script asynchronously to check temperature
+        function checkTemperature() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = xhr.responseText;
+                    if (response) {
+                        showNotification(response);
+                    }
+                }
+            };
+            xhr.open("GET", "graph_process.php", true);
+            xhr.send();
+        }
+
+        // Check temperature every 10 seconds (you can adjust this interval)
+        setInterval(checkTemperature, 10000); // 10 seconds
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Notification</title>
+</head>
+
+<body>
+    <div id="notification"></div>
+
+    <script>
+        function showNotification(message) {
+            var notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = message;
+            document.getElementById('notification').appendChild(notification);
+        }
+
+        // Load the PHP script asynchronously to check temperature and send notifications
+        function checkTemperature() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = xhr.responseText;
+                    if (response) {
+                        showNotification(response);
+
+                        // Schedule the next notification after 30 seconds
+                        setTimeout(checkTemperature, 30000); // 30 seconds
+                    }
+                }
+            };
+            xhr.open("GET", "notification_process.php", true);
+            xhr.send();
+        }
+
+        // Start checking temperature and sending notifications
+        checkTemperature();
+    </script>
+</body>
+
+</html>
+
+
+
