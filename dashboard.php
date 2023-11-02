@@ -100,6 +100,7 @@ $result4 = $mysqli->query($sql3);
     <div class="search-container">
         <label for="search">Search:</label>
         <input type="text" id="search" placeholder="Search..." style="background-color: white;">
+        
     </div>
 
     <table id="data-table">
@@ -147,8 +148,18 @@ $result4 = $mysqli->query($sql3);
     </div>
 
     <div class="search-container">
+  
         <label for="search">Search:</label>
         <input type="text" id="search" placeholder="Search..." style="background-color: white;">
+        <form method="post" class="mb-10 mt-5"> 
+                    <label for="start-date" class="mr-2">Start Date:</label>
+                    <input type="date" id="start-date" name="start_date" class="border p-2 mr-4  filter invert">
+
+                    <label for="end-date" class="mr-2 ">End Date:</label>
+                    <input type="date" id="end-date" name="end_date" class="border p-2 mr-4  filter invert">
+
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Filter</button>
+                </form>
     </div>
 
     <table id="data-table">

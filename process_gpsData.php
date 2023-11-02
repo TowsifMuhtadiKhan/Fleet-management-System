@@ -33,20 +33,41 @@ if (isset($_POST['reg_num'])) {
     <title>Document</title>
     <style>
         .container {
+            
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
             margin: 0 auto;
+          
         }
 
         .table-container {
-            width: 80%;
+            margin-top: 100px;
             width: 80%;
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #edf2f7;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7fafc;
         }
     </style>
 </head>
@@ -65,6 +86,16 @@ if (isset($_POST['reg_num'])) {
         
       </tr>
     </thead>
+    <!-- Filter Option -->
+    <form method="post" class="mb-10"> 
+                    <label for="start-date" class="mr-2">Start Date:</label>
+                    <input type="date" id="start-date" name="start_date" class="border p-2 mr-4  filter invert">
+
+                    <label for="end-date" class="mr-2 ">End Date:</label>
+                    <input type="date" id="end-date" name="end_date" class="border p-2 mr-4  filter invert">
+
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Filter</button>
+                </form><br><br>
     <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
         $index2++;
         ?>

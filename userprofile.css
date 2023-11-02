@@ -297,10 +297,9 @@ form button.button3:hover {
 }
 .action-buttons button.sensor-button {
     background-color: #3498db;
-   
     border-color: none;
-   
     padding: 10px 10px;
+    font-size: 12px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -310,21 +309,15 @@ form button.button3:hover {
     transition: background-color 0.3s ease;
     
 }
-.action-buttons button.sensor-button:hover {
-  background-color: #1a75b1;
-
-}
-
 .action-buttons button.gps-button {
     background-color: #27ae60;
     color: #fff;
     border-color: none;
-    
+    font-size: 12px;
     padding: 10px 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    
     display: flex;
     justify-content: space-between;
     transition: background-color 0.3s ease;
@@ -332,20 +325,17 @@ form button.button3:hover {
 }
 .action-buttons button.gps-button:hover {
   background-color: #097737;
-
- 
 }
 
 .action-buttons button.scanner-button {
     background-color: #0180ca;
     color: #fff;
     border-color: none;
-   
+    font-size: 12px;
     padding: 10px 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-   
     display: flex;
     justify-content: space-between;
     transition: background-color 0.3s ease;
@@ -358,6 +348,7 @@ form button.button3:hover {
 .action-buttons button.drowsiness-button {
     background-color: #f5a80f;
     color: #fff;
+    font-size: 12px;
     border-color: none;   
     padding: 10px 10px;
     border: none;
@@ -370,39 +361,8 @@ form button.button3:hover {
 .action-buttons button.drowsiness-button:hover {
   background-color: #ce8c09;
 }
-.action-buttons button.remove-button {
-  background-color: #f80202;
-  color: #fff;
-  border-color: none;   
-  padding: 10px 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;  
-  display: flex;
-  justify-content: space-between;
-  transition: background-color 0.3s ease; 
-}
-.action-buttons button.remove-button:hover {
-background-color: #b50303;
-}
-.action-buttons button.drowsiness-button:hover {
-  background-color: #ce8c09;
-}
-.action-buttons button.remove-button2 {
-  background-color: #f80202;
-  color: #fff;
-  border-color: none;   
-  padding: 10px 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;  
-  display: flex;
-  justify-content: space-between;
-  transition: background-color 0.3s ease; 
-}
-.action-buttons button.remove-button2:hover {
-background-color: #b50303;
-}
+
+
 .add-car button {
     padding: 10px;
     background-color: #3498db;
@@ -414,35 +374,12 @@ background-color: #b50303;
 .add-car-form button:hover {
     background-color: #2980b9;
 }
-form button.removeButton {
-  background-color: red; /* Set the background color to red */
-  color: white; /* Set the text color to white */
-  border: none; /* Remove border */
-  padding: 10px 20px; /* Add padding to the button */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  transition: background-color 0.3s; /* Add a smooth transition effect */
-  border-radius: 5px;  
-}
 
-form button.removeButton:hover {
-  background-color: darkred; /* Change background color to dark red on hover */
-}
-form button.removeButton2 {
-  background-color: red; /* Set the background color to red */
-  color: white; /* Set the text color to white */
-  border: none; /* Remove border */
-  padding: 10px 20px; /* Add padding to the button */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  transition: background-color 0.3s; /* Add a smooth transition effect */
-  border-radius: 5px;  
-}
 
-form button.removeButton2:hover {
-  background-color: darkred; /* Change background color to dark red on hover */
-}
 form button.removebutton2 {
   background-color: red;
   color: white; /* Set the background color to red */
+  font-size: 12px;
   border-color: none;   
   padding: 10px 20px;
   border: none;
@@ -458,6 +395,7 @@ form button.removebutton2:hover {
 }
 form button.updatebutton2 {
   background-color: rgb(33, 37, 254);
+  font-size: 12px;
   color: white; /* Set the background color to red */
   border-color: none;   
   padding: 10px 20px;

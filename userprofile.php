@@ -152,7 +152,7 @@ $mysqli->close();
                         <th >Car Type</th>
                         <th >Car Name</th>
                         <th >Car Model</th>
-                        <th >Registration Number</th>
+                        <th >Reg Number</th>
                         <th >Chassis Number</th>
                       
                         <th >Action</th>
@@ -179,7 +179,7 @@ $mysqli->close();
                                 <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
                                 <button type="submit" class="gps-button">GPS</button>
                             </form>
-                                <button class="scanner-button">Scanner</button>
+                                <!-- <button class="scanner-button">Scanner</button> -->
                                 <button class="drowsiness-button">Drowsiness</button>
 
                                 <form action="updateCar.php" method="POST">
@@ -208,8 +208,8 @@ $mysqli->close();
                 <thead>
                     <tr>
                         <th >Sl</th>
-                        <th >Driver Name</th>
-                        <th >Driver's Contact No.</th>
+                        <th >Name</th>
+                        <th >Contact No.</th>
                         <th >License Number</th>
                         <th >License Expired Date</th>
                         <th >Action</th>
@@ -241,7 +241,7 @@ $mysqli->close();
                         <input type="hidden" name="licenseNumber" value="<?php echo $row['License_Number']; ?>">
                         <input type="hidden" name="licenseExpired" value="<?php echo $row['License_Expired']; ?>">
                     <!-- Submit button to delete the record -->
-                    <button type="submit" class="removeButton">Remove</button>
+                    <button type="submit" class="removebutton2">Remove</button>
                 </form>
                         </td>
                 

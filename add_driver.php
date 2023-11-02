@@ -27,11 +27,11 @@ if (isset($_POST['uemail'])) {
         <h2>Add Your Driver's info into <br><span class="colored-text">Fleet</span> Management</h2>
         <form id="signupForm" action="process_adddriver.php" method="post">
             <div class="input-group">
-                <label for="name">Driver Name</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="driverName" required>
             </div>
             <div class="input-group">
-                <label for="phone">Driver Number</label>
+                <label for="phone">Contact no.</label>
                 <input type="text" id="phone" name="driverNumber" required>
             </div>
             <div class="input-group">
