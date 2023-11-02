@@ -32,13 +32,7 @@ if (isset($_POST['reg_num'])) {
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
     <style>
-      .container2 {          
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            margin: 0 auto;        
-        }
+
        .container {          
             display: flex;
             justify-content: center;
