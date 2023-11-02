@@ -122,7 +122,7 @@ if (isset($_POST['reg_num'])) {
 
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Filter</button>
                 </form><br><br>
-    <?php 
+        <?php 
         $iframeUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41302.52822922945!2d90.38577628734889!3d23.795039604406824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c64c103a8093%3A0xd660a4f50365294a!2sNorth%20South%20University!5e0!3m2!1sen!2sbd!4v1698933139133!5m2!1sen!2sbd";
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
               $index2++;
@@ -148,7 +148,15 @@ if (isset($_POST['reg_num'])) {
                 </div>
             </div>
         </tbody>
-    <?php } ?>
+        <?php } ?>
+            </table>
+   
+        <div class="mt-4">
+                <a href="userprofile.php" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Back</a>
+            </div>
+        </div>
+</div> 
+    
     
     <script>
         function openPopup(index) {
