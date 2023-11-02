@@ -31,6 +31,7 @@ $sql4 = "SELECT * FROM users";
 $result4 = $mysqli->query($sql3);
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,9 +130,9 @@ $result4 = $mysqli->query($sql3);
           <td><?php echo $row['Car_Type'] ?></td>
           <td><?php echo $row['Registration_Number'] ?></td>
           <td>
-          <form action="process_removeUser.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+          <form action="process_removeData.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                     <!-- Hidden input field to store unique identifier -->
-                       
+                       <input type="hidden" name="email" value="<?php echo $row['Email']; ?>">
                     <!-- Submit button to delete the record -->
                     <button type="submit" class="removeButton">Remove</button>
           </form>
