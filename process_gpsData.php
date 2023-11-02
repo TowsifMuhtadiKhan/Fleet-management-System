@@ -37,10 +37,8 @@ if (isset($_POST['reg_num'])) {
             justify-content: center;
             align-items: center;
             height: 100%;
-            margin: 0 auto;
-          
+            margin: 0 auto;        
         }
-
         .table-container {
             margin-top: 50px;
             width: 80%;
@@ -78,13 +76,11 @@ if (isset($_POST['reg_num'])) {
             background: rgb(4, 182, 84);
             border: 5px solid white; /* White border around the map */
             z-index: 9999;
-    }
-        
-
+         }
         .popup-content {
             position: relative;
             padding: 20px;
-        }
+         }
         .close{
           position: absolute;
           top: 10px;
@@ -92,7 +88,7 @@ if (isset($_POST['reg_num'])) {
           cursor: pointer;
           font-size: 24px;
           color: #555;
-      }
+        }
     </style>
 </head>
 <body class="bg-gray-100" style="color: black;">
@@ -108,8 +104,7 @@ if (isset($_POST['reg_num'])) {
         <th class="border p-2">Time & Date</th>
         <th class="border p-2">Longitude</th>
         <th class="border p-2">Latitude</th>
-        <th class="border p-2">View</th>
-        
+        <th class="border p-2">View</th>     
       </tr>
     </thead>
     <!-- Filter Option -->
@@ -156,8 +151,7 @@ if (isset($_POST['reg_num'])) {
             </div>
         </div>
 </div> 
-    
-    
+      
     <script>
         function openPopup(index) {
             var popup = document.getElementById('popup_' + index);
@@ -169,6 +163,5 @@ if (isset($_POST['reg_num'])) {
             popup.style.display = 'none';
         }
     </script>
-
 </body>
 </html>
