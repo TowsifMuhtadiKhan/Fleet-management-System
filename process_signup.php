@@ -40,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
         // Error occurred
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        header('Location:signup.html');
+        alert('User already registered');
     }
 
     $conn->close();
