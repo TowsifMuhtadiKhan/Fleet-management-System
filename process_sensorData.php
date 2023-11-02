@@ -20,6 +20,7 @@ if (isset($_POST['reg_num'])) {
     echo "Registration Number not received.";
   }
 
+include 'chart_generator.php'; 
 
 ?>
 <!DOCTYPE html>
@@ -29,11 +30,11 @@ if (isset($_POST['reg_num'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Document</title>
 
     <style>
-        .container {
-            
+        .container {       
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,7 +44,7 @@ if (isset($_POST['reg_num'])) {
         }
 
         .table-container {
-            margin-top: 100px;
+            margin-top: 50px;
             width: 80%;
             background-color: white;
             padding: 20px;
@@ -63,7 +64,8 @@ if (isset($_POST['reg_num'])) {
         }
 
         th {
-            background-color: #edf2f7;
+            background-color: rgb(4, 182, 84);
+            color: white;
         }
 
         tr:nth-child(even) {
@@ -74,8 +76,10 @@ if (isset($_POST['reg_num'])) {
 <body class="bg-gray-100" style="color: black;">
     <div class="container">
         <div class="table-container p-6 bg-white rounded-lg shadow-lg">
-            <h3 class="font-bold text-lg mb-4">Sensor Data</h3>
-            
+            <h3 class="font-bold text-lg mb-4" style="background-color:rgb(4, 182, 84); padding: 5px; color: white; text-align:center">Sensor Data</h3>
+            <h3 class="font-bold text-lg mb-4" style="color:rgb(4, 182, 84)" > Average Sensor Data</h3>
+            <canvas id="sensorChart" width="600" height="200"></canvas><br><br>
+            <h3 class="font-bold text-lg mb-4" style="color:rgb(4, 182, 84)" > Sensor Data History</h3>
             <table class="w-full">
                 <!-- head -->
                 <thead>
@@ -89,13 +93,13 @@ if (isset($_POST['reg_num'])) {
                 </thead>
                 <!-- Filter Option -->
                 <form method="post" class="mb-4">
-                    <label for="start-date" class="mr-2">Start Date:</label>
-                    <input type="date" id="start-date" name="start_date" class="border p-2 mr-4  filter invert">
+                    <label for="start-date" class="mr-2" style="color:rgb(4, 182, 84)">Start Date:</label>
+                    <input type="date" id="start-date" name="start_date" class="border p-2 mr-4 bg-green-500 ">
 
-                    <label for="end-date" class="mr-2">End Date:</label>
-                    <input type="date" id="end-date" name="end_date" class="border p-2 mr-4  filter invert">
+                    <label for="end-date" class="mr-2" style="color:rgb(4, 182, 84)">End Date:</label>
+                    <input type="date" id="end-date" name="end_date" class="border p-2 mr-4 bg-green-500 ">
 
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Filter</button>
+                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Filter</button>
                 </form>
                 <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
                     $index2++;
@@ -114,10 +118,35 @@ if (isset($_POST['reg_num'])) {
                 <?php } ?>
             </table>
             <div class="mt-4">
-                <a href="userprofile.php" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Back</a>
+                <a href="userprofile.php" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Back</a>
             </div>
         </div>
     </div>
+    <script>
+    var averages = <?php echo $averages; ?>;
+
+    var ctx = document.getElementById('sensorChart').getContext('2d');
+    var sensorChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Temperature', 'Humidity', 'Air Pressure'],
+            datasets: [{
+                label: 'Average Sensor Data',
+                data: [averages.Temperature, averages.Humidity, averages.AirPressure],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
     </body>
 </html>

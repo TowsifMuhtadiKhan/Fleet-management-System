@@ -20,7 +20,7 @@ if (isset($_POST['reg_num'])) {
   } else {
     echo "Registration Number not received.";
   }
-
+  include 'chart_generator.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +32,7 @@ if (isset($_POST['reg_num'])) {
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
     <style>
-        .container {
-            
+       .container {          
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,7 +42,7 @@ if (isset($_POST['reg_num'])) {
         }
 
         .table-container {
-            margin-top: 100px;
+            margin-top: 50px;
             width: 80%;
             background-color: white;
             padding: 20px;
@@ -63,18 +62,46 @@ if (isset($_POST['reg_num'])) {
         }
 
         th {
-            background-color: #edf2f7;
+            background-color: rgb(4, 182, 84);
+            color: white;
         }
 
         tr:nth-child(even) {
             background-color: #f7fafc;
         }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .close-button {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
+          font-size: 24px;
+          color: #555;
+      }
     </style>
 </head>
 <body class="bg-gray-100" style="color: black;">
 <div class="container">
         <div class="table-container p-6 bg-white rounded-lg shadow-lg">
-            <h3 class="font-bold text-lg mb-4">GPS Data</h3>
+        <h3 class="font-bold text-lg mb-4" style="background-color:rgb(4, 182, 84); padding: 5px; color: white; text-align:center">GPS Data</h3>
+           
             <table class="w-full">
     <!-- head -->
     <thead>
@@ -83,18 +110,19 @@ if (isset($_POST['reg_num'])) {
         <th class="border p-2">Time & Date</th>
         <th class="border p-2">Longitude</th>
         <th class="border p-2">Latitude</th>
+        <th class="border p-2">View</th>
         
       </tr>
     </thead>
     <!-- Filter Option -->
     <form method="post" class="mb-10"> 
-                    <label for="start-date" class="mr-2">Start Date:</label>
-                    <input type="date" id="start-date" name="start_date" class="border p-2 mr-4  filter invert">
+                    <label for="start-date" class="mr-2" style="color:rgb(4, 182, 84)">Start Date:</label>
+                    <input type="date" id="start-date" name="start_date" class="border p-2 mr-4  bg-green-500">
 
-                    <label for="end-date" class="mr-2 ">End Date:</label>
-                    <input type="date" id="end-date" name="end_date" class="border p-2 mr-4  filter invert">
+                    <label for="end-date" class="mr-2 " style="color:rgb(4, 182, 84)">End Date:</label>
+                    <input type="date" id="end-date" name="end_date" class="border p-2 mr-4  bg-green-500">
 
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Filter</button>
+                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Filter</button>
                 </form><br><br>
     <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
         $index2++;
@@ -106,14 +134,19 @@ if (isset($_POST['reg_num'])) {
         <td class="border p-2"><?php echo $row['Date_Time']; ?></td>
         <td class="border p-2"><?php echo $row['longitude']; ?></td>
         <td class="border p-2"><?php echo $row['latitude']; ?></td>
+        <td class="border p-2"><button id="viewLocationBtn" class="btn-map">View Location</button>
+            
+        </td>
+
       </tr>
       <!-- row 2 -->
       
     </tbody>
+    
     <?php } ?>
   </table>
   <div class="mt-4">
-                <a href="userprofile.php" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Back</a>
+                <a href="userprofile.php" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Back</a>
             </div>
 </div>
 
@@ -122,5 +155,28 @@ if (isset($_POST['reg_num'])) {
       </form>
     </div>
   </div>
+  <div class="popup" id="popup">
+                <div class="popup-content">
+                    <span class="close-button" id="closeButton">&times;</span>
+                    <!-- Your Google Maps iframe goes here -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41302.52822922945!2d90.38577628734889!3d23.795039604406824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c64c103a8093%3A0xd660a4f50365294a!2sNorth%20South%20University!5e0!3m2!1sen!2sbd!4v1698933139133!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>  
+  <!-- Modal -->
+  <script>
+        var viewLocationBtn = document.getElementById('viewLocationBtn');
+        var popup = document.getElementById('popup');
+        var closeButton = document.getElementById('closeButton');
+
+        viewLocationBtn.addEventListener('click', function () {
+            // Show the popup
+            popup.style.display = 'flex';
+        });
+
+        closeButton.addEventListener('click', function () {
+            // Close the popup
+            popup.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
