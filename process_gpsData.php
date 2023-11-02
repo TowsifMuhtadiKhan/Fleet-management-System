@@ -69,25 +69,23 @@ if (isset($_POST['reg_num'])) {
         tr:nth-child(even) {
             background-color: #f7fafc;
         }
-        .popup {
-            display: none;
+        .popup {   
+          display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(4, 182, 84);
+            border: 5px solid white; /* White border around the map */
+            z-index: 9999;
+    }
+        
 
         .popup-content {
             position: relative;
-            background: white;
             padding: 20px;
-            border-radius: 10px;
         }
-        .close-button {
+        .close{
           position: absolute;
           top: 10px;
           right: 10px;
@@ -124,59 +122,45 @@ if (isset($_POST['reg_num'])) {
 
                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Filter</button>
                 </form><br><br>
-    <?php while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
-        $index2++;
+    <?php 
+        $iframeUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41302.52822922945!2d90.38577628734889!3d23.795039604406824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c64c103a8093%3A0xd660a4f50365294a!2sNorth%20South%20University!5e0!3m2!1sen!2sbd!4v1698933139133!5m2!1sen!2sbd";
+          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
+              $index2++;
         ?>
-    <tbody>
-      <!-- row 1 -->
-      <tr class="border">
-        <td class="border p-2"><?php echo $index2?></td>
-        <td class="border p-2"><?php echo $row['Date_Time']; ?></td>
-        <td class="border p-2"><?php echo $row['longitude']; ?></td>
-        <td class="border p-2"><?php echo $row['latitude']; ?></td>
-        <td class="border p-2"><button id="viewLocationBtn" class="btn-map">View Location</button>
-            
-        </td>
-
-      </tr>
-      <!-- row 2 -->
-      
-    </tbody>
-    
-    <?php } ?>
-  </table>
-  <div class="mt-4">
-                <a href="userprofile.php" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Back</a>
-            </div>
-</div>
-
-        <!-- if there is a button in form, it will close the modal -->
-        
-      </form>
-    </div>
-  </div>
-  <div class="popup" id="popup">
+        <tbody>
+            <!-- row 1 -->
+            <tr class="border">
+                <td class="border p-2"><?php echo $index2?></td>
+                <td class="border p-2"><?php echo $row['Date_Time']; ?></td>
+                <td class="border p-2"><?php echo $row['longitude']; ?></td>
+                <td class="border p-2"><?php echo $row['latitude']; ?></td>
+                <td class="border p-2">
+                    <button class="btn-map" onclick="openPopup('<?php echo $index2; ?>')">
+                        View Location
+                    </button>
+                </td>
+            </tr>
+            <!-- Popup for this row -->
+            <div id="popup_<?php echo $index2; ?>" class="popup">
                 <div class="popup-content">
-                    <span class="close-button" id="closeButton">&times;</span>
-                    <!-- Your Google Maps iframe goes here -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41302.52822922945!2d90.38577628734889!3d23.795039604406824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c64c103a8093%3A0xd660a4f50365294a!2sNorth%20South%20University!5e0!3m2!1sen!2sbd!4v1698933139133!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <span class="close" onclick="closePopup('<?php echo $index2; ?>')">&times;</span>
+                    <iframe src="<?php echo $iframeUrl; ?>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-            </div>  
-  <!-- Modal -->
-  <script>
-        var viewLocationBtn = document.getElementById('viewLocationBtn');
-        var popup = document.getElementById('popup');
-        var closeButton = document.getElementById('closeButton');
-
-        viewLocationBtn.addEventListener('click', function () {
-            // Show the popup
-            popup.style.display = 'flex';
-        });
-
-        closeButton.addEventListener('click', function () {
-            // Close the popup
+            </div>
+        </tbody>
+    <?php } ?>
+    
+    <script>
+        function openPopup(index) {
+            var popup = document.getElementById('popup_' + index);
+            popup.style.display = 'block';
+        }
+    
+        function closePopup(index) {
+            var popup = document.getElementById('popup_' + index);
             popup.style.display = 'none';
-        });
+        }
     </script>
+
 </body>
 </html>
