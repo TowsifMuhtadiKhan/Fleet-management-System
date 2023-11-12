@@ -149,9 +149,9 @@ $mysqli->close();
                 <thead>
                     <tr>
                         <th >Sl</th>
-                        <th >Car Type</th>
-                        <th >Car Name</th>
-                        <th >Car Model</th>
+                        <th >Vehicle Type</th>
+                        <th >Manufacturer</th>
+                        <th >Vehicle Model</th>
                         <th >Reg Number</th>
                         <th >Chassis Number</th>
                       

@@ -24,10 +24,10 @@ if (isset($_POST['uemail'])) {
     
     <div class="login-container">
         
-        <h2>Add Your Car into <br><span class="colored-text">Fleet</span> Management</h2>
+        <h2>Add Your vehicle info into <br><span class="colored-text">Fleet</span> Management</h2>
         <form id="signupForm" action="process_addcar.php" method="post">
             <div class="input-group">
-                <label for="name">Car Type</label>
+                <label for="name">Vehicle Type</label>
                 <select id="carType" name="carType" required>
                     <option value="JEEP">JEEP</option>
                     <option value="SUV">SUV</option>
@@ -41,7 +41,7 @@ if (isset($_POST['uemail'])) {
 
          
             <div class="input-group">
-                <label for="phone">Car Name</label>
+                <label for="phone">Manufacturer</label>
                 <select id="carName" name="carName" required>
                     <option value="TOYOTA">TOYOTA</option>
                     <option value="NISSAN">NISSAN</option>
@@ -60,7 +60,7 @@ if (isset($_POST['uemail'])) {
             </div>
             
             <div class="input-group">
-                <label for="email">Car Model</label>
+                <label for="email">Vehicle  Model</label>
                 <input type="text" id="email" name="carModel" required>
             </div>
             <div class="input-group">
