@@ -179,7 +179,9 @@ $mysqli->close();
                                 <input type="hidden" name="reg_num" value="<?php echo $row['Registration_Number']; ?>">
                                 <button type="submit" class="gps-button">GPS</button>
                             </form>
-                                <!-- <button class="scanner-button">Scanner</button> -->
+                            <a href="https://incardoc.com/" >
+                              <button class="scanner-button">Scanner</button>
+                            </a>
                                 <button class="drowsiness-button">Drowsiness</button>
 
                                 <form action="updateCar.php" method="POST">
